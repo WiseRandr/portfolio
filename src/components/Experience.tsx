@@ -1,5 +1,5 @@
-import React from 'react';
-import { Building, Calendar, MapPin } from 'lucide-react';
+import React from "react";
+import { Building, Calendar, MapPin } from "lucide-react";
 
 interface ExperienceItem {
   title: string;
@@ -16,14 +16,14 @@ const Experience: React.FC = () => {
       title: "Lead Frontend Engineer",
       company: "COMIN",
       location: "France",
-      period: "2024 - Present",
-      current: true,
+      period: "2024 - 2025",
+      current: false,
       achievements: [
         "Achieved a 40% reduction in server downtime by implementing automated monitoring solutions and proactive maintenance plans",
         "Led a team of 5 engineers in developing a multi-platform application used by 50,000+ users",
         "Optimized database queries, enhancing application speed by reducing response times by 35%",
-        "Improved system efficiency by 30%, leading to a $10,000 annual savings in operational costs"
-      ]
+        "Improved system efficiency by 30%, leading to a $10,000 annual savings in operational costs",
+      ],
     },
     {
       title: "Frontend Engineer",
@@ -34,43 +34,53 @@ const Experience: React.FC = () => {
       achievements: [
         "Increased task management efficiency by 10% by developing an offline-capable internal app for seafarers",
         "Streamlined bidding process for seafarers, eliminating 90% of manual wire submissions via a new mobile app feature",
-        "Implemented a proactive notification system to alert seafarers of required pre-departure documentation, streamlining the embarkation process"
-      ]
+        "Implemented a proactive notification system to alert seafarers of required pre-departure documentation, streamlining the embarkation process",
+      ],
     },
     {
-      title: "Frontend Engineer", 
+      title: "Frontend Engineer",
       company: "FLYDESK",
       location: "Hong Kong",
       period: "2021 - 2022",
       current: false,
       achievements: [
         "Collaborated with remote development teams to successfully launch and maintain FlyDesk for international markets, including major clients like DFS, Native Union, and MTR (HK)",
-        "Engineered the migration of the database and API to a microservice architecture, leading to a 35% reduction in FlyDesk service response times"
-      ]
+        "Engineered the migration of the database and API to a microservice architecture, leading to a 35% reduction in FlyDesk service response times",
+      ],
     },
     {
       title: "Frontend Engineer",
-      company: "Opcadia", 
+      company: "Opcadia",
       location: "France",
       period: "2020 - 2021",
       current: false,
       achievements: [
         "Built a Next.js online platform enabling students to discover and book classes, resulting in a 40% increase in enrollment and a 5% boost in revenue within the first six months",
         "Spearheaded the development of a complex Next.js e-commerce platform, managing a team of 7 engineers to deliver the project on schedule (6 months)",
-        "Leveraged Next.js SEO to optimize website content, meta tags, and site structure, resulting in increased organic traffic"
-      ]
+        "Leveraged Next.js SEO to optimize website content, meta tags, and site structure, resulting in increased organic traffic",
+      ],
+    },
+    {
+      title: "Frontend Engineer",
+      company: "Santosha Consulting",
+      location: "Madagascar",
+      period: "2018 - 2020",
+      current: false,
+      achievements: [
+        "Collaborated with a startup team, leveraging my skills in both React and Angular to deliver high-quality frontend solutions for more than 4 projects",
+      ],
     },
     {
       title: "Software Engineer",
       company: "ETech Consulting",
-      location: "Madagascar", 
+      location: "Madagascar",
       period: "2017 - 2018",
       current: false,
       achievements: [
         "Leveraged my skills in Symfony, WordPress, and PHP to provide frontend development support for a startup team, contributing to the successful completion of 4+ projects",
-        "Reduced page load times by 80% by engineering key single-page application features using React and Angular, resulting in higher conversion rates by 20%"
-      ]
-    }
+        "Reduced page load times by 80% by engineering key single-page application features using React and Angular, resulting in higher conversion rates by 20%",
+      ],
+    },
   ];
 
   return (
@@ -81,13 +91,14 @@ const Experience: React.FC = () => {
             Professional Experience
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            7+ years of building exceptional web applications and leading development teams across the globe.
+            7+ years of building exceptional web applications and leading
+            development teams across the globe.
           </p>
         </div>
 
         <div className="space-y-8">
           {experiences.map((experience, index) => (
-            <div 
+            <div
               key={index}
               className="bg-gray-50 rounded-xl p-6 sm:p-8 hover:shadow-lg transition-all duration-300 border-l-4 border-blue-500"
             >
@@ -119,12 +130,19 @@ const Experience: React.FC = () => {
               </div>
 
               <div className="space-y-3">
-                {experience.achievements.map((achievement, achievementIndex) => (
-                  <div key={achievementIndex} className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-gray-700 leading-relaxed">{achievement}</p>
-                  </div>
-                ))}
+                {experience.achievements.map(
+                  (achievement, achievementIndex) => (
+                    <div
+                      key={achievementIndex}
+                      className="flex items-start gap-3"
+                    >
+                      <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-gray-700 leading-relaxed">
+                        {achievement}
+                      </p>
+                    </div>
+                  )
+                )}
               </div>
             </div>
           ))}

@@ -1,39 +1,49 @@
-import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Github, Linkedin, Send, CheckCircle } from 'lucide-react';
+import React, { useState } from "react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Github,
+  Linkedin,
+  Send,
+  CheckCircle,
+} from "lucide-react";
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Create mailto link
-    const subject = encodeURIComponent(formData.subject || 'Portfolio Contact');
+    const subject = encodeURIComponent(formData.subject || "Portfolio Contact");
     const body = encodeURIComponent(
       `Hello Wise,\n\nName: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
     );
-    const mailtoUrl = `mailto:randriamialison.wise@gmail.com?subject=${subject}&body=${body}`;
-    
+    const mailtoUrl = `mailto:randriamialisonwise@gmail.com?subject=${subject}&body=${body}`;
+
     window.location.href = mailtoUrl;
     setIsSubmitted(true);
-    
+
     // Reset form after delay
     setTimeout(() => {
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      setFormData({ name: "", email: "", subject: "", message: "" });
       setIsSubmitted(false);
     }, 3000);
   };
@@ -46,7 +56,8 @@ const Contact: React.FC = () => {
             Get In Touch
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            I'm always open to discussing new opportunities, interesting projects, or just having a chat about technology.
+            I'm always open to discussing new opportunities, interesting
+            projects, or just having a chat about technology.
           </p>
         </div>
 
@@ -58,9 +69,9 @@ const Contact: React.FC = () => {
                 Let's Connect
               </h3>
               <p className="text-gray-600 mb-8 text-lg leading-relaxed">
-                Whether you're looking for a frontend engineer for your next project, 
-                want to collaborate on something exciting, or just want to say hello, 
-                I'd love to hear from you.
+                Whether you're looking for a frontend engineer for your next
+                project, want to collaborate on something exciting, or just want
+                to say hello, I'd love to hear from you.
               </p>
             </div>
 
@@ -71,11 +82,11 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">Email</h4>
-                  <a 
-                    href="mailto:randriamialison.wise@gmail.com"
+                  <a
+                    href="mailto:randriamialisonwise@gmail.com"
                     className="text-blue-600 hover:text-blue-500 transition-colors"
                   >
-                    randriamialison.wise@gmail.com
+                    randriamialisonwise@gmail.com
                   </a>
                 </div>
               </div>
@@ -86,7 +97,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">Phone</h4>
-                  <a 
+                  <a
                     href="tel:+26132720211011"
                     className="text-gray-600 hover:text-gray-500 transition-colors"
                   >
@@ -133,16 +144,25 @@ const Contact: React.FC = () => {
           <div className="bg-white p-8 rounded-xl shadow-md">
             {isSubmitted ? (
               <div className="text-center py-8">
-                <CheckCircle className="text-green-500 mx-auto mb-4" size={48} />
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Message Sent!</h3>
+                <CheckCircle
+                  className="text-green-500 mx-auto mb-4"
+                  size={48}
+                />
+                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                  Message Sent!
+                </h3>
                 <p className="text-gray-600">
-                  Thank you for reaching out. I'll get back to you as soon as possible.
+                  Thank you for reaching out. I'll get back to you as soon as
+                  possible.
                 </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Name *
                   </label>
                   <input
@@ -158,7 +178,10 @@ const Contact: React.FC = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Email *
                   </label>
                   <input
@@ -174,7 +197,10 @@ const Contact: React.FC = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="subject"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Subject
                   </label>
                   <input
@@ -189,7 +215,10 @@ const Contact: React.FC = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Message *
                   </label>
                   <textarea

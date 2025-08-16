@@ -121,7 +121,7 @@ const Contact: React.FC = () => {
               <h4 className="font-semibold text-gray-900 mb-4">Follow Me</h4>
               <div className="flex gap-4">
                 <a
-                  href="https://github.io/wiserandr"
+                  href="https://github.com/wiserandr"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-gray-900 text-white p-3 rounded-lg hover:bg-gray-800 transition-colors"
@@ -129,7 +129,7 @@ const Contact: React.FC = () => {
                   <Github size={24} />
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/wise-randriamialison"
+                  href="https://www.linkedin.com/in/wise-randriamialison-a95a24181/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-500 transition-colors"

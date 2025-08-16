@@ -17,6 +17,17 @@ const About: React.FC = () => {
 
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-6">
+            <div className="flex justify-center lg:justify-start mb-8">
+              <div className="relative">
+                <img
+                  src="/profile-photo.png"
+                  alt="Wise Randriamialirison"
+                  className="w-48 h-48 rounded-full object-cover shadow-lg border-4 border-white"
+                />
+                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-500/20 to-transparent"></div>
+              </div>
+            </div>
+
             <p className="text-lg text-gray-700 leading-relaxed">
               I'm an experienced Frontend Engineer with over 7 years of
               expertise in crafting high-quality user experiences and scalable

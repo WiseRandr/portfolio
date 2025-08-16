@@ -1,8 +1,9 @@
 {
   "name": "wise-portfolio",
   "version": "1.0.0",
+  "type": "module",
   "private": true,
-  "homepage": "https://wiserandr.github.io",
+  "homepage": "https://WiseRandr.github.io/portfolio",
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

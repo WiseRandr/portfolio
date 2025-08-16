@@ -20,7 +20,7 @@ const About: React.FC = () => {
             <div className="flex justify-center lg:justify-start mb-8">
               <div className="relative">
                 <img
-                  src="/profile-photo.png"
+                  src="./profile-photo.png"
                   alt="Wise Randriamialirison"
                   className="w-48 h-48 rounded-full object-cover shadow-lg border-4 border-white"
                 />
@@ -55,7 +55,7 @@ const About: React.FC = () => {
 
             <div className="mt-8">
               <a
-                href="/WiseRandriamialisonResume.pdf"
+                href="./WiseRandriamialisonResume.pdf"
                 download="WiseRandriamialisonResume.pdf"
                 className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg"
               >

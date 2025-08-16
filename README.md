@@ -1,136 +1,69 @@
-# Portfolio Website
+# 👋 Hi, I'm Wise Randriamialison
 
-A modern, responsive portfolio website built with React, TypeScript, and Tailwind CSS. This project showcases professional experience, skills, achievements, and contact information in a clean, accessible design.
+<div align="center">
 
-## 🌐 Live Demo
+![Profile Banner](https://img.shields.io/badge/Senior%20Frontend%20Engineer-7%2B%20Years%20Experience-blue?style=for-the-badge&logo=react&logoColor=white)
 
-**[View Live Portfolio →](https://WiseRandr.github.io/portfolio/)**
+**🚀 Building exceptional user experiences with React, TypeScript & Modern Web Technologies**
 
-The portfolio is automatically deployed to GitHub Pages and updates with every push to the main branch.
+---
 
-## 🛠️ Technology Stack
+## � **[View My Complete Portfolio →](https://wiserandr.github.io/portfolio/)**
 
-- **Frontend Framework:** React 18.3.1
-- **Language:** TypeScript
-- **Build Tool:** Vite 5.4.2
-- **Styling:** Tailwind CSS 3.4.1
-- **Icons:** Lucide React
-- **CSS Processing:** PostCSS with Autoprefixer
-- **Linting:** ESLint
-- **Deployment:** GitHub Pages
+_Click above to explore my full portfolio with interactive projects, detailed experience, and contact information_
 
-## 📁 Project Structure
+---
 
-```
-src/
-├── App.tsx              # Main application component
-├── main.tsx            # Application entry point
-├── index.css           # Global styles and Tailwind imports
-├── vite-env.d.ts       # Vite type definitions
-└── components/
-    ├── Header.tsx      # Navigation header
-    ├── Hero.tsx        # Hero/landing section
-    ├── About.tsx       # About section
-    ├── Experience.tsx  # Work experience
-    ├── Skills.tsx      # Technical skills
-    ├── Achievements.tsx # Achievements/projects
-    ├── Contact.tsx     # Contact information
-    └── Footer.tsx      # Site footer
+</div>
+
+## � Professional Highlights
+
+- 🎯 **Lead Frontend Engineer** with **7+ years** of expertise
+- 🏢 Latest: **Lead Frontend Engineer at COMIN** (France)
+- � Led teams building applications serving **50,000+ users**
+- 📈 Achieved **40% performance improvements** through optimization
+- 🌍 Remote collaboration with international teams across **4+ countries**
+
+## 🛠️ Tech Stack
+
+```javascript
+const wiseRandriamialison = {
+  frontend: ["React", "TypeScript", "Next.js", "React Native"],
+  backend: ["Node.js", "NestJS", "PostgreSQL", "MongoDB"],
+  cloud: ["AWS", "Google Cloud Platform", "Docker"],
+  leadership: ["Team Management", "Code Reviews", "Mentoring"],
+  currentFocus: "Cybersecurity & Advanced React Patterns",
+};
 ```
 
-## 🚀 Getting Started
+## � Recent Achievements
 
-### Prerequisites
+- ⚡ **40% faster queries** by redesigning database architecture
+- 💰 **$10K annual savings** through automated monitoring solutions
+- 📱 **40% enrollment increase** with Next.js platform development
+- 🗺️ **80% reduction in route deviations** with Google Maps SDK integration
 
-- Node.js (version 20 or higher)
-- npm package manager
+## 🌐 Let's Connect
 
-### Installation
+<div align="center">
 
-1. Clone the repository:
+[![Portfolio](https://img.shields.io/badge/🌐_Portfolio-Visit_Now-2ea44f?style=for-the-badge)](https://wiserandr.github.io/portfolio/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/wise-randriamialison-a95a24181/)
+[![Email](https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:randriamialisonwise@gmail.com)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/wiserandr)
 
-```bash
-git clone https://github.com/WiseRandr/portfolio.git
-cd portfolio
-```
+</div>
 
-2. Install dependencies:
+---
 
-```bash
-npm install
-```
+<div align="center">
 
-3. Start the development server:
+### 🎯 **Ready to collaborate on your next project?**
 
-```bash
-npm run dev
-```
+**[🚀 Explore My Full Portfolio & Get In Touch →](https://wiserandr.github.io/portfolio/)**
 
-4. Open your browser and visit `http://localhost:5173`
+_Frontend Engineering • Team Leadership • Performance Optimization_
 
-## 📜 Available Scripts
+� **Antananarivo, Madagascar** | 🌍 **Available for Remote Work Worldwide**
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build locally
-- `npm run deploy` - Deploy to GitHub Pages
-
-## 🎨 Features
-
-- **Responsive Design:** Optimized for all device sizes
-- **Modern UI:** Clean, professional design with Tailwind CSS
-- **Fast Performance:** Built with Vite for optimal bundle size and loading speed
-- **Type Safety:** Full TypeScript implementation
-- **Accessible:** Built with accessibility best practices (WCAG compliant)
-- **SEO Optimized:** Comprehensive SEO implementation including:
-  - Structured data (JSON-LD schema)
-  - Open Graph and Twitter Card meta tags
-  - Optimized meta descriptions and keywords
-  - Sitemap and robots.txt
-  - Canonical URLs
-  - Image alt text optimization
-  - Semantic HTML structure
-  - Performance optimizations with preload hints
-
-## 🌐 Deployment
-
-This project is configured for automatic deployment to GitHub Pages using GitHub Actions.
-
-### Automatic Deployment
-
-- Every push to the `main` branch triggers an automatic deployment
-- The site is built using Node.js 20 and deployed to GitHub Pages
-- No manual deployment steps required
-
-### Manual Deployment (Alternative)
-
-If you want to deploy manually using the gh-pages package:
-
-```bash
-npm run deploy
-```
-
-**Live Site:** [https://WiseRandr.github.io/portfolio/](https://WiseRandr.github.io/portfolio/)
-
-### Deployment Configuration
-
-- **Source:** GitHub Actions
-- **Build Tool:** Vite
-- **Base Path:** `/portfolio/` (configured for GitHub Pages subdirectory)
-- **Output Directory:** `dist/`
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is private and proprietary.
-
-## 📧 Contact
-
-For any questions or inquiries, please use the contact form on the website or reach out through the provided contact information.
+</div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowDown, Github, Mail, MapPin } from "lucide-react";
+import { ArrowDown, User, Mail, MapPin } from "lucide-react";
 
 const Hero: React.FC = () => {
   const scrollToSection = (sectionId: string) => {
@@ -56,15 +56,13 @@ const Hero: React.FC = () => {
             >
               Get In Touch
             </button>
-            <a
-              href="https://github.io/wiserandr"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => scrollToSection("about")}
               className="flex items-center gap-2 bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:scale-105"
             >
-              <Github size={20} />
-              View My Work
-            </a>
+              <User size={20} />
+              More About Me
+            </button>
           </div>
         </div>
 

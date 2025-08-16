@@ -1,5 +1,5 @@
 import React from "react";
-import { Code, Heart, Lightbulb } from "lucide-react";
+import { Code, Heart, Lightbulb, Download } from "lucide-react";
 
 const About: React.FC = () => {
   return (
@@ -52,6 +52,17 @@ const About: React.FC = () => {
               continuous learning and staying curious about emerging
               technologies and industry developments.
             </p>
+
+            <div className="mt-8">
+              <a
+                href="/WiseRandriamialisonResume.pdf"
+                download="WiseRandriamialisonResume.pdf"
+                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg"
+              >
+                <Download size={20} />
+                Download Resume
+              </a>
+            </div>
           </div>
 
           <div className="space-y-8">

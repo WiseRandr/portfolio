@@ -21,7 +21,7 @@ const About: React.FC = () => {
               <div className="relative">
                 <img
                   src="./profile-photo.png"
-                  alt="Wise Randriamialirison"
+                  alt="Wise Randriamialison - Senior Frontend Engineer and Lead Developer with 7+ years experience in React, TypeScript, and modern web technologies"
                   className="w-48 h-48 rounded-full object-cover shadow-lg border-4 border-white"
                 />
                 <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-500/20 to-transparent"></div>

@@ -1,0 +1,20 @@
+{
+  "name": "Wise Randriamialison - Senior Frontend Engineer",
+  "short_name": "Wise Portfolio",
+  "description": "Senior Frontend Engineer portfolio showcasing 7+ years of experience in React, TypeScript, and modern web technologies",
+  "start_url": "/portfolio/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e40af",
+  "orientation": "portrait-primary",
+  "scope": "/portfolio/",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

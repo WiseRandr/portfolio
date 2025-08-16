@@ -2,6 +2,12 @@
 
 A modern, responsive portfolio website built with React, TypeScript, and Tailwind CSS. This project showcases professional experience, skills, achievements, and contact information in a clean, accessible design.
 
+## 🌐 Live Demo
+
+**[View Live Portfolio →](https://WiseRandr.github.io/portfolio/)**
+
+The portfolio is automatically deployed to GitHub Pages and updates with every push to the main branch.
+
 ## 🛠️ Technology Stack
 
 - **Frontend Framework:** React 18.3.1
@@ -36,23 +42,26 @@ src/
 
 ### Prerequisites
 
-- Node.js (version 16 or higher)
-- npm or yarn package manager
+- Node.js (version 20 or higher)
+- npm package manager
 
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/WiseRandr/portfolio.git
 cd portfolio
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Start the development server:
+
 ```bash
 npm run dev
 ```
@@ -77,13 +86,30 @@ npm run dev
 
 ## 🌐 Deployment
 
-This project is configured for deployment on GitHub Pages. To deploy:
+This project is configured for automatic deployment to GitHub Pages using GitHub Actions.
+
+### Automatic Deployment
+
+- Every push to the `main` branch triggers an automatic deployment
+- The site is built using Node.js 20 and deployed to GitHub Pages
+- No manual deployment steps required
+
+### Manual Deployment (Alternative)
+
+If you want to deploy manually using the gh-pages package:
 
 ```bash
 npm run deploy
 ```
 
-The site will be available at: https://wiserandr.github.io
+**Live Site:** [https://WiseRandr.github.io/portfolio/](https://WiseRandr.github.io/portfolio/)
+
+### Deployment Configuration
+
+- **Source:** GitHub Actions
+- **Build Tool:** Vite
+- **Base Path:** `/portfolio/` (configured for GitHub Pages subdirectory)
+- **Output Directory:** `dist/`
 
 ## 🤝 Contributing
 

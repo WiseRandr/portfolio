@@ -19,7 +19,7 @@ const Contact: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -34,7 +34,7 @@ const Contact: React.FC = () => {
     // Create mailto link
     const subject = encodeURIComponent(formData.subject || "Portfolio Contact");
     const body = encodeURIComponent(
-      `Hello Wise,\n\nName: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      `Hello Wise,\n\nName: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`,
     );
     const mailtoUrl = `mailto:randriamialisonwise@gmail.com?subject=${subject}&body=${body}`;
 
@@ -98,10 +98,10 @@ const Contact: React.FC = () => {
                 <div>
                   <h4 className="font-semibold text-gray-900">Phone</h4>
                   <a
-                    href="tel:+26132720211011"
+                    href="tel:+261327202110"
                     className="text-gray-600 hover:text-gray-500 transition-colors"
                   >
-                    (+261) 32-72-021-101
+                    (+261) 32-72-021-10
                   </a>
                 </div>
               </div>

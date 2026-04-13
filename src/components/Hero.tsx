@@ -14,12 +14,11 @@ const Hero: React.FC = () => {
     <>
       <Helmet>
         <title>
-          Wise Randriamialison - Senior Frontend Engineer | React & TypeScript
-          Expert
+          Wise Randriamialison - Frontend Engineer | React, Next.js & TypeScript
         </title>
         <meta
           name="description"
-          content="Wise Randriamialison - Senior Frontend Engineer with 7+ years experience in React, TypeScript, and modern web technologies. Led teams serving 50,000+ users."
+          content="Wise Randriamialison - Frontend Engineer with 7+ years of experience building scalable web and mobile applications using React, Next.js, and TypeScript."
         />
       </Helmet>
 
@@ -42,13 +41,13 @@ const Hero: React.FC = () => {
             </h1>
 
             <h2 className="text-xl sm:text-2xl lg:text-3xl font-light mb-8 text-blue-100 animate-fade-in-up animation-delay-200">
-              Senior Frontend Engineer
+              Frontend Engineer
             </h2>
 
             <p className="text-lg sm:text-xl text-blue-50 mb-8 max-w-3xl mx-auto leading-relaxed animate-fade-in-up animation-delay-400">
-              Crafting exceptional user experiences with React, TypeScript, and
-              modern web technologies. 7+ years of building scalable
-              applications that users love.
+              Frontend Engineer with 7+ years building scalable web and mobile
+              applications using React, Next.js, and TypeScript, with a focus on
+              performance, usability, and cross-platform experiences.
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4 mb-12 animate-fade-in-up animation-delay-400">

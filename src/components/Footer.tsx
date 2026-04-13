@@ -1,5 +1,5 @@
-import React from 'react';
-import { Heart, Code } from 'lucide-react';
+import React from "react";
+import { Heart, Code } from "lucide-react";
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -12,12 +12,13 @@ const Footer: React.FC = () => {
             <Code className="text-blue-400" size={20} />
             <span className="text-xl font-bold">Wise Randriamialison</span>
           </div>
-          
+
           <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
-            Passionate Frontend Engineer crafting exceptional user experiences with modern web technologies. 
-            Based in Antananarivo, Madagascar, working with teams worldwide.
+            Frontend Engineer building scalable web and mobile experiences with
+            React, Next.js, and TypeScript. Based in Antananarivo, Madagascar,
+            and collaborating with international teams.
           </p>
-          
+
           <div className="border-t border-gray-800 pt-6">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-2 text-gray-400">
@@ -25,7 +26,7 @@ const Footer: React.FC = () => {
                 <Heart className="text-red-500 fill-current" size={16} />
                 <span>using React & TypeScript</span>
               </div>
-              
+
               <p className="text-gray-400">
                 © {currentYear} Wise Randriamialison. All rights reserved.
               </p>

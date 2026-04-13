@@ -10,8 +10,8 @@ const About: React.FC = () => {
             About Me
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Passionate frontend engineer with a proven track record of
-            delivering high-quality solutions and leading development teams.
+            Frontend engineer focused on scalable interfaces, performance
+            optimization, and reliable cross-platform product delivery.
           </p>
         </div>
 
@@ -21,7 +21,7 @@ const About: React.FC = () => {
               <div className="relative">
                 <img
                   src="./profile-photo.png"
-                  alt="Wise Randriamialison - Senior Frontend Engineer and Lead Developer with 7+ years experience in React, TypeScript, and modern web technologies"
+                  alt="Wise Randriamialison - Frontend Engineer with 7+ years of experience in React, Next.js, and TypeScript"
                   className="w-48 h-48 rounded-full object-cover shadow-lg border-4 border-white"
                 />
                 <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-500/20 to-transparent"></div>
@@ -29,28 +29,26 @@ const About: React.FC = () => {
             </div>
 
             <p className="text-lg text-gray-700 leading-relaxed">
-              I'm an experienced Frontend Engineer with over 7 years of
-              expertise in crafting high-quality user experiences and scalable
-              web applications. My latest position was Lead Frontend Engineer at
-              COMIN, where I specialized in React, TypeScript, and modern web
-              technologies.
+              Frontend Engineer with 7+ years of experience building scalable
+              web and mobile applications using React and Next.js. I specialize
+              in user interface development, performance optimization, and
+              cross-platform applications.
             </p>
 
             <p className="text-lg text-gray-700 leading-relaxed">
-              Throughout my career, I've had the privilege of working with
-              international teams, leading projects that achieved significant
-              improvements in performance and user engagement. I'm passionate
-              about writing clean, maintainable code and mentoring fellow
-              developers.
+              I have worked with international remote teams and contributed to
+              complex systems across logistics, mobility, and education. My
+              recent roles include leading a multi-platform application serving
+              more than 50,000 users and improving application performance,
+              operational efficiency, and reliability.
             </p>
 
             <p className="text-lg text-gray-700 leading-relaxed">
-              When I'm not coding, I'm constantly learning and expanding my
-              knowledge through online courses and self-study. Lately, I've been
-              diving deep into cybersecurity, exploring topics like ethical
-              hacking, network security, and threat analysis. I believe in
-              continuous learning and staying curious about emerging
-              technologies and industry developments.
+              I am now transitioning toward full-stack and system-oriented roles
+              through structured academic training while continuing to sharpen
+              my frontend expertise. I value clear architecture, maintainable
+              code, and practical collaboration across product and backend
+              teams.
             </p>
 
             <div className="mt-8">
@@ -76,8 +74,9 @@ const About: React.FC = () => {
                 </h3>
               </div>
               <p className="text-gray-600">
-                Committed to writing clean, efficient code with a focus on
-                performance, accessibility, and maintainability.
+                Building performant, maintainable interfaces with strong
+                attention to frontend architecture, usability, and delivery
+                quality.
               </p>
             </div>
 
@@ -91,8 +90,9 @@ const About: React.FC = () => {
                 </h3>
               </div>
               <p className="text-gray-600">
-                Experienced in leading development teams, mentoring junior
-                developers, and fostering collaborative work environments.
+                Comfortable leading small teams, coordinating with backend
+                engineers, and supporting delivery across distributed
+                environments.
               </p>
             </div>
 
@@ -106,8 +106,8 @@ const About: React.FC = () => {
                 </h3>
               </div>
               <p className="text-gray-600">
-                Always seeking new approaches to solve complex problems and
-                improve user experiences through innovative solutions.
+                Focused on practical improvements that increase adoption,
+                strengthen performance, and make complex products easier to use.
               </p>
             </div>
           </div>

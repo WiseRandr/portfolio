@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface SkillCategory {
   title: string;
@@ -9,39 +9,42 @@ interface SkillCategory {
 const Skills: React.FC = () => {
   const skillCategories: SkillCategory[] = [
     {
-      title: "Frontend Technologies",
-      skills: ["React", "React Native", "Next.js", "TypeScript", "JavaScript", "HTML5", "CSS3", "SASS"],
-      color: "blue"
+      title: "Core Expertise (Frontend)",
+      skills: [
+        "React",
+        "React Native",
+        "Next.js",
+        "JavaScript",
+        "TypeScript",
+        "UI Performance Optimization",
+        "Responsive Design",
+      ],
+      color: "blue",
     },
     {
-      title: "Backend & Database", 
-      skills: ["Node.js", "NestJS", "PostgreSQL", "MySQL", "MongoDB", "GraphQL"],
-      color: "teal"
-    },
-    {
-      title: "Tools & DevOps",
-      skills: ["Docker", "AWS", "Google Cloud Platform", "Lambda", "DynamoDB", "S3", "Webpack"],
-      color: "purple"
-    },
-    {
-      title: "Testing & Methodologies",
-      skills: ["Jest", "Cypress", "Agile", "Scrum"],
-      color: "green"
+      title: "Working Knowledge (Backend & Systems)",
+      skills: [
+        "Node.js (basic usage)",
+        "REST API Integration",
+        "PostgreSQL (basic usage)",
+        "Docker (basic usage)",
+      ],
+      color: "teal",
     },
     {
       title: "Operating Systems",
-      skills: ["Mac", "Linux", "Windows"],
-      color: "orange"
-    }
+      skills: ["Mac", "Linux"],
+      color: "orange",
+    },
   ];
 
   const getColorClasses = (color: string) => {
     const colorMap: { [key: string]: string } = {
       blue: "bg-blue-100 text-blue-800 border-blue-200",
-      teal: "bg-teal-100 text-teal-800 border-teal-200", 
+      teal: "bg-teal-100 text-teal-800 border-teal-200",
       purple: "bg-purple-100 text-purple-800 border-purple-200",
       green: "bg-green-100 text-green-800 border-green-200",
-      orange: "bg-orange-100 text-orange-800 border-orange-200"
+      orange: "bg-orange-100 text-orange-800 border-orange-200",
     };
     return colorMap[color] || colorMap.blue;
   };
@@ -54,13 +57,14 @@ const Skills: React.FC = () => {
             Technical Skills
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            A comprehensive toolkit of modern technologies and frameworks I use to build exceptional web applications.
+            A focused set of frontend technologies and supporting tools I use to
+            ship reliable, high-performance products.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {skillCategories.map((category, index) => (
-            <div 
+            <div
               key={index}
               className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300"
             >
@@ -91,22 +95,38 @@ const Skills: React.FC = () => {
                 <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl font-bold text-blue-600">7+</span>
                 </div>
-                <h4 className="font-semibold text-gray-900 mb-2">Years Experience</h4>
-                <p className="text-gray-600">Proven track record in frontend development</p>
+                <h4 className="font-semibold text-gray-900 mb-2">
+                  Years Experience
+                </h4>
+                <p className="text-gray-600">
+                  Building web and mobile applications with modern frontend
+                  stacks
+                </p>
               </div>
               <div className="text-center">
                 <div className="bg-teal-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl font-bold text-teal-600">50k+</span>
                 </div>
-                <h4 className="font-semibold text-gray-900 mb-2">Users Impacted</h4>
-                <p className="text-gray-600">Applications serving tens of thousands</p>
+                <h4 className="font-semibold text-gray-900 mb-2">
+                  Users Impacted
+                </h4>
+                <p className="text-gray-600">
+                  Supported delivery of products used by more than 50,000 users
+                </p>
               </div>
               <div className="text-center">
                 <div className="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl font-bold text-orange-600">40%</span>
+                  <span className="text-2xl font-bold text-orange-600">
+                    40%
+                  </span>
                 </div>
-                <h4 className="font-semibold text-gray-900 mb-2">Performance Gains</h4>
-                <p className="text-gray-600">Average improvement in application efficiency</p>
+                <h4 className="font-semibold text-gray-900 mb-2">
+                  Engagement Growth
+                </h4>
+                <p className="text-gray-600">
+                  Results delivered through better UX, performance, and product
+                  execution
+                </p>
               </div>
             </div>
           </div>

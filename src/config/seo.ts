@@ -1,13 +1,13 @@
 // SEO Configuration for Wise Randriamialison Portfolio
 export const seoConfig = {
   title:
-    "Wise Randriamialison - Senior Frontend Engineer | React & TypeScript Expert",
+    "Wise Randriamialison - Frontend Engineer | React, Next.js & TypeScript",
   description:
-    "Wise Randriamialison - Senior Frontend Engineer with 7+ years experience in React, TypeScript, and modern web technologies. Led teams building applications serving 50,000+ users.",
+    "Wise Randriamialison - Frontend Engineer with 7+ years of experience building scalable web and mobile applications using React, Next.js, and TypeScript.",
   keywords: [
     "Frontend Engineer",
     "React Developer",
-    "TypeScript Expert",
+    "Next.js Developer",
     "JavaScript Developer",
     "Lead Frontend Engineer",
     "Web Development",
@@ -32,7 +32,7 @@ export const seoConfig = {
   },
   contact: {
     email: "randriamialisonwise@gmail.com",
-    phone: "+26132720211011",
+    phone: "+261327202110",
     location: "Antananarivo, Madagascar",
   },
   organization: "COMIN",

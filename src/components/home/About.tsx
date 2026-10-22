@@ -15,8 +15,8 @@ export function About() {
               50,000 people.
             </p>
             <p>
-              My work doesn&apos;t stop at the UI. I led a migration from legacy PHP to Next.js and collaborate closely
-              with backend teams on APIs and data. I&apos;m continuing to deepen my backend and systems expertise.
+              My work extends beyond the UI. I&apos;ve led a migration from legacy PHP to Next.js and collaborate closely
+              with backend teams on API design, data flows, deployment, and technical decisions across the stack.
             </p>
           </div>
           <div className="mt-10 space-y-5">

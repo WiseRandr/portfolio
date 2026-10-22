@@ -21,9 +21,9 @@ export const profile = {
 } as const;
 
 export const proofPoints = [
-  { value: "50,000+", label: "users on a product I led" },
+  { value: "50,000+", label: "users on a product I helped lead" },
   { value: "5", label: "engineers led" },
-  { value: "8+ yrs", label: "shipping to production" },
+  { value: "8+ yrs", label: "building production software" },
   { value: "PHP → Next.js", label: "platform migration led" },
 ] as const;
 

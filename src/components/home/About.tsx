@@ -11,8 +11,8 @@ export function About() {
           <div className="space-y-4 text-lg leading-relaxed text-ink-muted">
             <p>
               I&apos;ve spent eight years building React and React Native products for remote teams in France,
-              Cyprus, and Hong Kong. Most recently I led five engineers shipping a multi-platform app used by more than
-              50,000 people.
+              Cyprus, and Hong Kong. Most recently I led five engineers building a ride-hailing platform (rider and
+              driver apps, an API, and an ops dashboard) used by more than 50,000 riders and drivers.
             </p>
             <p>
               My work extends beyond the UI. I&apos;ve led a migration from legacy PHP to Next.js and collaborate closely

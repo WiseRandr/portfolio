@@ -53,5 +53,17 @@ export const principles = [
 
 export const skills = {
   core: ["React", "Next.js", "TypeScript", "React Native", "JavaScript", "UI performance", "Responsive design"],
-  alsoWith: ["Node.js", "REST APIs", "PostgreSQL", "Docker", "Google Maps SDK", "Angular"],
+  alsoWith: [
+    "Node.js",
+    "NestJS",
+    "REST APIs",
+    "Redis",
+    "Stripe",
+    "PostgreSQL",
+    "Docker",
+    "AWS",
+    "Redux",
+    "Expo",
+    "Google Maps Navigation SDK",
+  ],
 } as const;

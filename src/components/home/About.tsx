@@ -34,7 +34,7 @@ export function About() {
           <h3 className="mb-6 text-sm uppercase tracking-[0.14em] text-ink-faint lg:mt-[4.75rem]">How I work</h3>
           <ul className="grid gap-4 sm:grid-cols-2">
             {principles.map((item) => (
-              <li key={item.title} className="rounded-2xl bg-surface p-5">
+              <li key={item.title} className="rounded-2xl bg-surface p-5 sm:odd:last:col-span-2">
                 <p className="font-medium">{item.title}</p>
                 <p className="mt-2 text-sm leading-relaxed text-ink-muted">{item.body}</p>
               </li>

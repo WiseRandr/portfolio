@@ -27,23 +27,27 @@ export const proofPoints = [
   { value: "PHP → Next.js", label: "platform migration led" },
 ] as const;
 
-// ⚠️ Draft wording: Wise to confirm these reflect how they actually work.
+// Confirmed with Wise 2026-10-22. Each principle is backed by a case study.
 export const principles = [
   {
-    title: "Measure before optimizing",
-    body: "Performance work starts with a profile and ends with a number, not a hunch.",
+    title: "Own the whole problem",
+    body: "I learn the system end to end, from the apps to the API, and stay with a problem until it's solved, so my decisions hold up across the stack.",
   },
   {
-    title: "Ship small, ship often",
-    body: "Small, reviewable changes keep releases predictable and teams unblocked.",
+    title: "Fix the cause, not the symptom",
+    body: "When apps freeze or data lags, I look at the architecture behind it, not just the screen. That's how live driver locations ended up in Redis.",
   },
   {
-    title: "Accessible by default",
-    body: "Keyboard, screen reader, and contrast checks are part of done, not a later pass.",
+    title: "Readable over clever",
+    body: "Code is read far more often than it's written. I choose the clear solution over the complex one, so the whole team can work on it.",
   },
   {
-    title: "Unblock the team first",
-    body: "As a lead, my best work is often the decision or review that lets five people move.",
+    title: "Integrity and security before speed",
+    body: "Correct data and a safe system come before shipping fast: one secure API in front of many services, and payments that go through a queue.",
+  },
+  {
+    title: "Write it down",
+    body: "Across teams, chat and calls stop being enough. Documentation becomes the source of truth, so I make it part of the work.",
   },
 ] as const;
 

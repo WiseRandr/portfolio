@@ -28,15 +28,15 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "marlow-offline-first-app",
-    title: "An offline-first app for crews at sea",
+    title: "A crew app that keeps working at sea",
     company: "Marlow Navigation",
     period: "2022 – 2026",
-    role: "Frontend Engineer",
+    role: "Frontend Engineer (contract)",
     summary:
-      "Built a mobile application that keeps working without connectivity, replacing manual processes for seafarers.",
-    stack: ["React Native", "TypeScript", "Offline sync"],
-    outcome: "Works fully offline",
-    status: "draft",
+      "Built features for Marlow's mobile app for seafarers and captains: sailing documents, payslips, voyage agendas and allotments, plus a crew-admin workspace, all usable offline.",
+    stack: ["React Native", "TypeScript", "Offline caching"],
+    outcome: "Works offline at sea",
+    status: "published",
   },
   {
     slug: "opcadia-php-to-nextjs",

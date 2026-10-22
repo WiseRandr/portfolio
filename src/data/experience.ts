@@ -26,7 +26,8 @@ export const experience: Role[] = [
     period: "2022 – 2026",
     location: "Cyprus · Remote",
     highlights: [
-      "Built an offline-capable mobile application that improved operational efficiency for seafarers",
+      "Built features for a mobile app used by seafarers and captains to manage sailing documents, payslips, voyage agendas and allotments, with offline support",
+      "Proposed a middleware API, built and adopted by the team, giving the app one secure entry point to Marlow's many services",
     ],
     caseStudy: "marlow-offline-first-app",
   },

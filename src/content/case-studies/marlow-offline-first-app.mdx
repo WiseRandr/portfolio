@@ -1,40 +1,63 @@
-{/*
-  Case study draft. Replace each <Placeholder> with your own words, then set
-  status: "published" for this slug in src/data/case-studies.ts.
-  Don't include anything confidential about Marlow Navigation or its clients.
-  Check the Context paragraph below: it was drafted from public information.
-*/}
-
 ## Context
 
-Marlow Navigation manages crews for ships around the world. Seafarers often have little or no internet connection, so tools that need to be online break down at sea. I built an offline-capable mobile application to improve their day-to-day operations.
+Marlow Navigation manages crews for ships around the world. Before a vessel can sail, its captain and crew must have the right documents signed and in order, and once at sea they can be away for more than a month with little or no connectivity.
 
-<Placeholder>What did the app let seafarers do? Which manual process did it replace (paper forms, emails, spreadsheets)?</Placeholder>
+The Marlow mobile app puts everything a seafarer needs for a voyage on their phone:
+
+- **Sailing documents:** lists the documents each crew member needs for a given voyage, and reminds them of required actions such as signatures.
+- **Payslips:** available to view directly in the app.
+- **Voyage agenda:** shows the route and the activities or actions required at each port.
+- **Allotments:** lets crew members send part of their pay to a beneficiary, such as family at home, by sending a request to Marlow's services, which then trigger the wire transfer.
+- **Crew admin workspace:** gives crew administrators a view of every crew member's compliance status: who still needs to sign a document, who is leaving which vessel and where, and more.
+
+The app didn't exist to be "offline", but it had to keep working offline, because that's where its users spend most of their time.
 
 ## The problem
 
-<Placeholder>What made offline hard here? For example: how long ships stay offline, how much data, what happens when two people edit the same record, slow or expensive satellite connections, old devices.</Placeholder>
+- **No single API.** The app depended on many separate Marlow services, with no single entry point for the client to call.
+- **Unreliable connectivity.** Crews at sea can go long periods without internet, yet still need their documents and agenda, and still need to act.
+- **A wide range of devices.** Crew members use all kinds of phones, so every screen had to work properly across many screen sizes and device types.
 
 ## My role
 
-<Placeholder>What did you own? The whole mobile frontend, the offline layer, the sync logic, the UI? Who did you work with (backend, product, crew representatives)?</Placeholder>
+I was a frontend engineer on the mobile team, working across the app through continuous releases:
+
+- **Feature delivery:** built and shipped features release after release.
+- **API architecture:** proposed a middleware API between the app and Marlow's services, which the team built and adopted.
+- **Offline experience:** built the offline features, including downloading documents ahead of a voyage, and the document screens that let crew preview each document and see which ones are required for which sailing.
+- **Collaboration:** worked closely with my teammates, Marlow's in-house API teams, the product owner, and QA testers.
 
 ## Key decisions
 
-### Offline storage and sync
+### One API in front of many services
 
-<Placeholder>How did the app store data locally, and how did it sync when a connection came back? How did you handle conflicts or failed syncs? What did you consider and reject?</Placeholder>
+Rather than have the app call each of Marlow's services directly, I proposed a middleware API that sits in between and talks to the services on the app's behalf. It was built and became the app's single entry point. This made client code simpler, because there was one consistent interface instead of many, and it reduced security exposure, because the internal services were no longer called directly from users' phones.
 
-### Designing for the people using it
+### Caching reads so the app works at sea
 
-<Placeholder>What did you learn about the users that changed the design? For example: large touch targets, clear sync status, working on a moving ship.</Placeholder>
+Every `GET` request was cached, so the documents, agenda and other data a crew member had already loaded stayed available without a connection.
+
+### Queueing actions until a connection returns
+
+For selected actions, the app saved the request locally while offline and sent it automatically once the device was back online. Where an action genuinely couldn't be performed yet, the app said so clearly with a snackbar message rather than failing silently.
+
+### Managing documents on the device
+
+Downloaded documents raised two questions: where to store them, and for how long. Documents were kept in the app's own storage, encoded as base64, rather than saved to the phone's shared files, so they stayed inside the app instead of being exposed to the rest of the device. A clean-up process removed documents once they were no longer needed, so crew phones didn't fill up with outdated files.
 
 ## Results
 
-- Fully usable without a connection
-- Replaced manual workflows for seafarers
-- <Placeholder>Anything measurable: forms per month, time saved per task, adoption across vessels. Only real numbers.</Placeholder>
+- **Crew know what's required of them** before and during a voyage, from their own phone, wherever they are.
+- **Allotments** let crew members support their families while at sea.
+- **Crew admins can check the status** of every crew member in one place.
+- **A single place** for crew to check and request anything related to Marlow's services.
 
 ## What I'd do differently
 
-<Placeholder>One honest reflection.</Placeholder>
+### Understand the delivery pipeline across teams earlier
+
+On a project with several teams, the frontend is the last step: it depends on work from the other teams being finished and merged first. I didn't fully understand that pipeline at the start, and the frontend team sometimes ended up with work stuck waiting on dependencies. Mapping those dependencies early would have helped us plan around them.
+
+### Treat documentation as the source of truth
+
+Communication inside my own team came naturally, but as it scaled across teams, group chats and video calls stopped being enough. Documentation became the only reliable source of truth. Writing it doesn't come naturally to most frontend developers, me included, but I made it a team practice, because the project's maintainability and longevity depended on it.

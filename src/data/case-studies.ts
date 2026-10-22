@@ -46,9 +46,9 @@ export const caseStudies: CaseStudy[] = [
     role: "Frontend Engineer (project lead)",
     summary:
       "Replaced a manual, PHP-based study-plan store with a self-service Next.js e-commerce app: instant course previews, live enrolment status, and better SEO.",
-    stack: ["Next.js", "React", "API routes", "Static rendering"],
+    stack: ["Next.js", "React", "API routes", "MongoDB", "Vercel"],
     outcome: "PHP → Next.js",
-    status: "draft",
+    status: "published",
   },
 ];
 

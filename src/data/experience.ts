@@ -45,8 +45,7 @@ export const experience: Role[] = [
     period: "2020 – 2021",
     location: "France · Remote",
     highlights: [
-      "Led the migration of the business platform from a legacy PHP site to Next.js",
-      "Led frontend development of an e-commerce platform delivered within 6 months",
+      "Led the rebuild of a legacy PHP store as a self-service Next.js e-commerce platform, delivered within 6 months",
     ],
     caseStudy: "opcadia-php-to-nextjs",
   },

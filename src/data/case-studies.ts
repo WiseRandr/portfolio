@@ -40,13 +40,13 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "opcadia-php-to-nextjs",
-    title: "Migrating a legacy PHP platform to Next.js",
+    title: "Rebuilding a legacy PHP store in Next.js",
     company: "Opcadia",
     period: "2020 – 2021",
-    role: "Frontend Engineer",
+    role: "Frontend Engineer (project lead)",
     summary:
-      "Led the move from a basic PHP site to a modern Next.js application, giving the business a maintainable, SEO-friendly foundation.",
-    stack: ["Next.js", "React", "SEO"],
+      "Replaced a manual, PHP-based study-plan store with a self-service Next.js e-commerce app: instant course previews, live enrolment status, and better SEO.",
+    stack: ["Next.js", "React", "API routes", "Static rendering"],
     outcome: "PHP → Next.js",
     status: "draft",
   },

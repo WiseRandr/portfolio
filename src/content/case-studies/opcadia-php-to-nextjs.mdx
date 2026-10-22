@@ -1,42 +1,67 @@
 {/*
-  Case study draft. Replace each <Placeholder> with your own words, then set
-  status: "published" for this slug in src/data/case-studies.ts.
+  Case study draft. Replace each remaining <Placeholder> with your own words,
+  then set status: "published" for this slug in src/data/case-studies.ts.
 */}
 
 ## Context
 
-Opcadia's business ran on a basic PHP website. I led its migration to a modern Next.js application. In the same period I also led frontend development of an e-commerce platform that was delivered within six months.
+Opcadia sells personalised study plans online. Its storefront was a basic PHP website: customers couldn't configure a course themselves, and had to send their preferences in and wait for them to be validated before they could see what their plan would look like.
 
-<Placeholder>What is Opcadia's business, and what did the website need to do (sell courses, take sign-ups, publish content)?</Placeholder>
+I led the rebuild of the platform as a Next.js e-commerce application, delivered within six months.
 
 ## The problem
 
-<Placeholder>What was wrong with the PHP site? For example: hard to change, slow, poor SEO, no component reuse, hard to hire for. Why was a migration worth the risk?</Placeholder>
+The legacy PHP site was holding back both the customer experience and the business:
+
+- **A manual, slow buying journey.** Customers had to request their preferences and wait for validation before they could preview a course plan. Every purchase depended on a back-and-forth.
+- **Poor UI and UX.** Pages were slow, and the interface couldn't support interactive choices.
+- **No component reuse.** Each change meant duplicating markup, which slowed the team down and made the site inconsistent.
+- **Weak SEO.** The site was hard for search engines to crawl and rank, limiting organic acquisition.
 
 ## My role
 
-<Placeholder>Did you propose the migration, plan it, or both? Who else was involved? How did you keep the business running during the switch?</Placeholder>
+I owned the project from planning through to production:
+
+- **Scoping:** audited the existing platform, mapped every part of the customer journey that needed to change, and turned it into a concrete delivery plan.
+- **Technical direction:** chose the framework and architecture best suited to a fast, self-service buying experience.
+- **UX foundations:** designed the core user flows and the base UI for course selection and preview.
+- **Team leadership:** split the work across the team and reviewed code to keep quality and consistency high.
+- **Delivery:** deployed the application and maintained it after launch.
 
 ## Key decisions
 
 ### Why Next.js
 
-<Placeholder>What did Next.js give you that other options didn't (server rendering for SEO, routing, developer speed)? Which alternatives did you consider?</Placeholder>
+Next.js solved each of the platform's main problems in one framework:
 
-### Migrating without breaking the business
+- **Static rendering** for fast pages and better SEO than the PHP site.
+- **API routes** to serve cached course data, so the frontend could build previews without a round trip to a manual process.
+- **A React component model** that made the UI reusable and consistent across pages.
+- **A lightweight deployment** that was simpler to run and maintain than the legacy stack.
 
-<Placeholder>Big-bang switch or page by page? How did you protect SEO: URL redirects, metadata, sitemaps? How did you test before going live?</Placeholder>
+### Instant course previews without waiting for validation
 
-### Delivering an e-commerce platform in six months
+The biggest change for customers was removing the wait. Instead of submitting preferences and waiting for approval, customers configured their course directly on the site and saw their plan immediately. We built the preview on the frontend from cached course data served by Next.js API routes, so details appeared as soon as a customer made a choice.
 
-<Placeholder>How did you scope and plan it to land on time? What did you cut or defer?</Placeholder>
+This turned a manual request into a self-service flow, with an interactive dashboard where customers could review their plan and follow the live status of their enrolment from the website.
+
+### Migrating with a big-bang switch
+
+We replaced the PHP site in a single cut-over rather than migrating page by page. To protect search rankings during development, the new Next.js site was blocked from search engine crawlers (via `robots.txt`) until it went live, so unfinished pages were never indexed alongside the old site.
+
+<Placeholder>How did you handle the switch itself: redirects from old PHP URLs, testing before launch, and what happened on launch day? One or two sentences.</Placeholder>
 
 ## Results
 
-- Legacy PHP site replaced by a Next.js application
-- E-commerce platform delivered within **six months**
-- <Placeholder>Any other real outcomes: speed, SEO, how quickly the team could now ship changes. No invented numbers.</Placeholder>
+- **Self-service course configuration:** customers choose their own options and preferences, with no manual request needed.
+- **Instant plan previews** through an interactive dashboard, instead of waiting for validation.
+- **Live enrolment status** visible directly on the website.
+- **Better SEO** from statically rendered pages.
+- **A faster application** with a lighter, simpler deployment.
+- **Delivered within six months.**
+
+<Placeholder>If you have any real numbers (page load time, conversion, organic traffic, support requests), add them here. If not, leave this out.</Placeholder>
 
 ## What I'd do differently
 
-<Placeholder>One honest reflection.</Placeholder>
+<Placeholder>One honest reflection. For example, something you'd plan differently, test earlier, or migrate more gradually.</Placeholder>

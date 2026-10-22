@@ -1,13 +1,6 @@
 import React, { useState } from "react";
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Github,
-  Linkedin,
-  Send,
-  CheckCircle,
-} from "lucide-react";
+import { Mail, MapPin, Github, Linkedin, Send, CheckCircle } from "lucide-react";
+import { profile } from "../data/profile";
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -16,7 +9,7 @@ const Contact: React.FC = () => {
     subject: "",
     message: "",
   });
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isMailAppOpened, setIsMailAppOpened] = useState(false);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -28,24 +21,17 @@ const Contact: React.FC = () => {
     }));
   };
 
+  // There is no backend: the form pre-fills a message in the visitor's email
+  // app, so the confirmation must not claim the message was sent.
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Create mailto link
     const subject = encodeURIComponent(formData.subject || "Portfolio Contact");
     const body = encodeURIComponent(
       `Hello Wise,\n\nName: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`,
     );
-    const mailtoUrl = `mailto:randriamialisonwise@gmail.com?subject=${subject}&body=${body}`;
-
-    window.location.href = mailtoUrl;
-    setIsSubmitted(true);
-
-    // Reset form after delay
-    setTimeout(() => {
-      setFormData({ name: "", email: "", subject: "", message: "" });
-      setIsSubmitted(false);
-    }, 3000);
+    window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
+    setIsMailAppOpened(true);
   };
 
   return (
@@ -78,41 +64,26 @@ const Contact: React.FC = () => {
             <div className="space-y-6">
               <div className="flex items-center gap-4">
                 <div className="bg-blue-100 p-3 rounded-lg">
-                  <Mail className="text-blue-600" size={24} />
+                  <Mail className="text-blue-600" size={24} aria-hidden="true" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">Email</h4>
                   <a
-                    href="mailto:randriamialisonwise@gmail.com"
+                    href={`mailto:${profile.email}`}
                     className="text-blue-600 hover:text-blue-500 transition-colors"
                   >
-                    randriamialisonwise@gmail.com
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <div className="bg-teal-100 p-3 rounded-lg">
-                  <Phone className="text-teal-600" size={24} />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900">Phone</h4>
-                  <a
-                    href="tel:+261327202110"
-                    className="text-gray-600 hover:text-gray-500 transition-colors"
-                  >
-                    (+261) 32-72-021-10
+                    {profile.email}
                   </a>
                 </div>
               </div>
 
               <div className="flex items-center gap-4">
                 <div className="bg-green-100 p-3 rounded-lg">
-                  <MapPin className="text-green-600" size={24} />
+                  <MapPin className="text-green-600" size={24} aria-hidden="true" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">Location</h4>
-                  <p className="text-gray-600">Antananarivo, Madagascar</p>
+                  <p className="text-gray-600">{profile.location}</p>
                 </div>
               </div>
             </div>
@@ -121,20 +92,22 @@ const Contact: React.FC = () => {
               <h4 className="font-semibold text-gray-900 mb-4">Follow Me</h4>
               <div className="flex gap-4">
                 <a
-                  href="https://github.com/wiserandr"
+                  href={profile.links.github}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="GitHub profile (opens in a new tab)"
                   className="bg-gray-900 text-white p-3 rounded-lg hover:bg-gray-800 transition-colors"
                 >
-                  <Github size={24} />
+                  <Github size={24} aria-hidden="true" />
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/wise-randriamialison-a95a24181/"
+                  href={profile.links.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="LinkedIn profile (opens in a new tab)"
                   className="bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-500 transition-colors"
                 >
-                  <Linkedin size={24} />
+                  <Linkedin size={24} aria-hidden="true" />
                 </a>
               </div>
             </div>
@@ -142,19 +115,34 @@ const Contact: React.FC = () => {
 
           {/* Contact Form */}
           <div className="bg-white p-8 rounded-xl shadow-md">
-            {isSubmitted ? (
-              <div className="text-center py-8">
+            {isMailAppOpened ? (
+              <div className="text-center py-8" role="status">
                 <CheckCircle
                   className="text-green-500 mx-auto mb-4"
                   size={48}
+                  aria-hidden="true"
                 />
                 <h3 className="text-xl font-bold text-gray-900 mb-2">
-                  Message Sent!
+                  Almost there
                 </h3>
-                <p className="text-gray-600">
-                  Thank you for reaching out. I'll get back to you as soon as
-                  possible.
+                <p className="text-gray-600 mb-6">
+                  Your email app should have opened with your message ready to
+                  send. If it didn't, email me directly at{" "}
+                  <a
+                    href={`mailto:${profile.email}`}
+                    className="text-blue-600 hover:text-blue-500"
+                  >
+                    {profile.email}
+                  </a>
+                  .
                 </p>
+                <button
+                  type="button"
+                  onClick={() => setIsMailAppOpened(false)}
+                  className="text-blue-600 font-semibold hover:text-blue-500"
+                >
+                  Back to the form
+                </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -237,8 +225,8 @@ const Contact: React.FC = () => {
                   type="submit"
                   className="w-full bg-blue-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-blue-500 transition-all duration-300 flex items-center justify-center gap-2 transform hover:scale-105"
                 >
-                  <Send size={20} />
-                  Send Message
+                  <Send size={20} aria-hidden="true" />
+                  Open in Email App
                 </button>
               </form>
             )}

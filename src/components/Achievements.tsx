@@ -1,5 +1,5 @@
 import React from "react";
-import { TrendingUp, Users, Zap, Award } from "lucide-react";
+import { Award, Code, Users, WifiOff } from "lucide-react";
 
 interface Achievement {
   icon: React.ReactNode;
@@ -12,35 +12,35 @@ interface Achievement {
 const Achievements: React.FC = () => {
   const achievements: Achievement[] = [
     {
-      icon: <TrendingUp size={32} />,
-      title: "Improved Application Performance and Efficiency",
+      icon: <Users size={32} aria-hidden="true" />,
+      title: "Led a Team of 5 on a Multi-Platform App",
       description:
-        "Enhanced frontend data handling and collaborated on query optimizations to reduce response times and resource usage.",
-      impact: "Faster response times and reduced resource use",
+        "At COMIN, led five engineers delivering a web and mobile application used by more than 50,000 users, including a Google Maps Navigation SDK integration for more accurate routing.",
+      impact: "50,000+ users",
       color: "blue",
     },
     {
-      icon: <Zap size={32} />,
-      title: "Enhanced System Efficiency by 30%",
+      icon: <Code size={32} aria-hidden="true" />,
+      title: "Migrated a Legacy PHP Platform to Next.js",
       description:
-        "Contributed to application-level improvements and performance optimizations, leading to approximately $10,000 in annual operational savings.",
-      impact: "30% efficiency increase",
+        "At Opcadia, led the move from a basic PHP site to a modern Next.js application, giving the business a maintainable, SEO-friendly foundation to grow on.",
+      impact: "PHP → Next.js",
       color: "teal",
     },
     {
-      icon: <Users size={32} />,
-      title: "Drove a 40% Increase in User Engagement",
+      icon: <WifiOff size={32} aria-hidden="true" />,
+      title: "Shipped an Offline-Capable App for Seafarers",
       description:
-        "Built and optimized a Next.js platform that significantly increased user adoption and improved the overall product experience.",
-      impact: "40% engagement increase",
+        "At Marlow Navigation, built a mobile application that keeps working without connectivity, streamlining crew workflows and reducing manual processes.",
+      impact: "Offline-first",
       color: "green",
     },
     {
-      icon: <Award size={32} />,
-      title: "Supported Scalable Multi-Platform Delivery",
+      icon: <Award size={32} aria-hidden="true" />,
+      title: "Delivered an E-Commerce Platform in 6 Months",
       description:
-        "Led or contributed to product delivery across remote teams, integrating frontend systems with backend services and operational workflows.",
-      impact: "50,000+ users supported",
+        "At Opcadia, led frontend development of an e-commerce platform that was delivered within six months.",
+      impact: "6-month delivery",
       color: "purple",
     },
   ];
@@ -79,11 +79,11 @@ const Achievements: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {achievements.map((achievement, index) => {
+          {achievements.map((achievement) => {
             const colors = getColorClasses(achievement.color);
             return (
               <div
-                key={index}
+                key={achievement.title}
                 className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
               >
                 <div
@@ -138,8 +138,8 @@ const Achievements: React.FC = () => {
                 Continuous Improvement
               </h4>
               <p className="text-blue-100 text-sm">
-                Committed to growing toward full-stack and system-oriented
-                responsibilities
+                Growing into full-stack and system-oriented work through Humber
+                College studies and hands-on projects
               </p>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { profile, sections } from "../data/profile";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,7 +11,8 @@ const Header: React.FC = () => {
       setIsScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -28,21 +30,21 @@ const Header: React.FC = () => {
         isScrolled ? "bg-white/95 backdrop-blur-sm shadow-lg" : "bg-transparent"
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav aria-label="Main" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <button
             onClick={() => scrollToSection("hero")}
             className={`text-xl font-bold transition-colors ${
               isScrolled ? "text-blue-600" : "text-white"
             } hover:text-blue-500`}
-            aria-label="Navigate to homepage"
+            aria-label="Back to top"
           >
-            Wise R.
+            {profile.shortName}
           </button>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
-            {["about", "experience", "skills", "achievements", "contact"].map(
+            {sections.map(
               (section) => (
                 <button
                   key={section}
@@ -68,7 +70,7 @@ const Header: React.FC = () => {
             aria-label="Toggle mobile navigation menu"
             aria-expanded={isMenuOpen}
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
           </button>
         </div>
 
@@ -76,7 +78,7 @@ const Header: React.FC = () => {
         {isMenuOpen && (
           <div className="md:hidden bg-white border-t border-gray-200">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              {["about", "experience", "skills", "achievements", "contact"].map(
+              {sections.map(
                 (section) => (
                   <button
                     key={section}

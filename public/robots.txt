@@ -1,12 +1,4 @@
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://WiseRandr.github.io/portfolio/sitemap.xml
-
-# Allow search engines to crawl
-Allow: /static/
-Allow: /assets/
-
-# Disallow admin or private areas (if any)
-# Disallow: /admin/
+Sitemap: https://wiserandr.github.io/portfolio/sitemap.xml

@@ -6,7 +6,6 @@ interface ExperienceItem {
   company: string;
   location: string;
   period: string;
-  current: boolean;
   achievements: string[];
 }
 
@@ -14,10 +13,9 @@ const Experience: React.FC = () => {
   const experiences: ExperienceItem[] = [
     {
       title: "Lead Frontend Engineer (Part-time)",
-      company: "Comin & Incom",
-      location: "France",
-      period: "2024 - Present",
-      current: true,
+      company: "COMIN",
+      location: "France (remote)",
+      period: "2024 – Jun 2026",
       achievements: [
         "Led a team of 5 engineers to deliver a multi-platform application used by over 50,000 users",
         "Improved application performance by optimizing frontend architecture and data handling",
@@ -28,9 +26,8 @@ const Experience: React.FC = () => {
     {
       title: "Frontend Engineer (Contract)",
       company: "Marlow Navigation",
-      location: "Cyprus",
-      period: "2022 - Present",
-      current: true,
+      location: "Cyprus (remote)",
+      period: "2022 – May 2026",
       achievements: [
         "Developed an offline-capable mobile application improving operational efficiency for seafarers",
         "Built features to streamline workflows and reduce manual processes",
@@ -40,9 +37,8 @@ const Experience: React.FC = () => {
     {
       title: "Frontend Engineer",
       company: "FLYDESK",
-      location: "Hong Kong",
-      period: "2021 - 2022",
-      current: false,
+      location: "Hong Kong (remote)",
+      period: "2021 – 2022",
       achievements: [
         "Collaborated with distributed teams to deliver and maintain applications for international clients",
         "Worked with existing backend APIs to integrate frontend features and ensure smooth data flow within the application",
@@ -51,11 +47,10 @@ const Experience: React.FC = () => {
     {
       title: "Frontend Engineer",
       company: "Opcadia",
-      location: "France",
-      period: "2020 - 2021",
-      current: false,
+      location: "France (remote)",
+      period: "2020 – 2021",
       achievements: [
-        "Built a Next.js platform that increased student enrollment by 40%",
+        "Led the migration of the business platform from a legacy PHP site to a Next.js application",
         "Led frontend development for an e-commerce platform delivered within 6 months",
         "Optimized SEO and frontend performance to improve traffic and engagement",
       ],
@@ -64,8 +59,7 @@ const Experience: React.FC = () => {
       title: "Frontend Engineer",
       company: "Santosha Consulting",
       location: "Madagascar",
-      period: "2018 - 2020",
-      current: false,
+      period: "2018 – 2020",
       achievements: [
         "Delivered multiple frontend projects using React and Angular",
         "Collaborated with teams to implement scalable UI solutions",
@@ -75,12 +69,10 @@ const Experience: React.FC = () => {
       title: "Software Engineer",
       company: "ETech Consulting",
       location: "Madagascar",
-      period: "2017 - 2018",
-      current: false,
+      period: "2017 – 2018",
       achievements: [
         "Developed frontend features using React and Angular",
         "Contributed to web applications built with Symfony and WordPress",
-        "Improved application performance and reduced load times significantly",
       ],
     },
   ];
@@ -99,9 +91,9 @@ const Experience: React.FC = () => {
         </div>
 
         <div className="space-y-8">
-          {experiences.map((experience, index) => (
+          {experiences.map((experience) => (
             <div
-              key={index}
+              key={experience.company}
               className="bg-gray-50 rounded-xl p-6 sm:p-8 hover:shadow-lg transition-all duration-300 border-l-4 border-blue-500"
             >
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6">
@@ -111,21 +103,16 @@ const Experience: React.FC = () => {
                   </h3>
                   <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-gray-600">
                     <div className="flex items-center gap-2">
-                      <Building size={18} />
+                      <Building size={18} aria-hidden="true" />
                       <span className="font-medium">{experience.company}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <MapPin size={18} />
+                      <MapPin size={18} aria-hidden="true" />
                       <span>{experience.location}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Calendar size={18} />
+                      <Calendar size={18} aria-hidden="true" />
                       <span>{experience.period}</span>
-                      {experience.current && (
-                        <span className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">
-                          Current
-                        </span>
-                      )}
                     </div>
                   </div>
                 </div>
@@ -138,7 +125,10 @@ const Experience: React.FC = () => {
                       key={achievementIndex}
                       className="flex items-start gap-3"
                     >
-                      <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <div
+                        className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"
+                        aria-hidden="true"
+                      ></div>
                       <p className="text-gray-700 leading-relaxed">
                         {achievement}
                       </p>

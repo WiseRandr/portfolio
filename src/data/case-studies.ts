@@ -21,7 +21,7 @@ export const caseStudies: CaseStudy[] = [
     period: "2024 – 2026",
     role: "Lead Frontend Engineer",
     summary:
-      "Led a team of five engineers delivering a web and mobile application, including turn-by-turn routing with the Google Maps Navigation SDK.",
+      "Led a team of five engineers delivering a web and mobile application, and integrated the Google Maps Navigation SDK to improve route accuracy.",
     stack: ["React", "React Native", "TypeScript", "Google Maps SDK"],
     outcome: "50,000+ users",
     status: "draft",

@@ -13,9 +13,11 @@ export function CaseStudyCard({ study }: { study: CaseStudy }) {
       </div>
       <h3 className="mt-4 font-serif text-2xl leading-snug tracking-tight">{study.title}</h3>
       <p className="mt-3 flex-1 text-ink-muted">{study.summary}</p>
-      <div className="mt-6 flex items-center justify-between">
-        <span className="rounded-full bg-accent-soft px-3 py-1 text-sm text-accent">{study.outcome}</span>
-        <span className="text-sm font-medium text-ink group-hover:text-accent">
+      <div className="mt-6 flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
+        <span className="whitespace-nowrap rounded-full bg-accent-soft px-3 py-1 text-sm text-accent">
+          {study.outcome}
+        </span>
+        <span className="whitespace-nowrap text-sm font-medium text-ink group-hover:text-accent">
           Read case study <span aria-hidden="true">→</span>
         </span>
       </div>

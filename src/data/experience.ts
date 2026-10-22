@@ -38,8 +38,10 @@ export const experience: Role[] = [
     period: "2021 – 2022",
     location: "Hong Kong · Remote",
     highlights: [
-      "Delivered and maintained applications for international clients with distributed teams",
+      "Helped build a hybrid-work scheduler (React Native app, React configuration dashboard, NestJS API) where each company sets its own location and time-slot rules",
+      "Helped set up queued bulk imports through Kafka and a Neo4j replica of PostgreSQL that sped up per-user queries",
     ],
+    caseStudy: "flydesk-hybrid-work-scheduler",
   },
   {
     company: "Opcadia",

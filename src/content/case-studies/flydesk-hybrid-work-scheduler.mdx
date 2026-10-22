@@ -1,0 +1,51 @@
+## Context
+
+FLYDESK is a location scheduler for hybrid teams. Picture a company with people spread across a city, or across the world: before the week starts, everyone needs to know who will work where, and when. In FLYDESK, people record their schedule in advance (remote, in the office, or in a co-working space) and it becomes visible to the rest of the company.
+
+The product had three parts: a React Native app where employees sign in with their email and see their schedule for a selected company, a React dashboard the internal team used to configure the system, and a NestJS API behind both.
+
+## The problem
+
+Scheduling sounds simple until every company does it differently:
+
+- **Locations are open-ended.** A person can work from almost anywhere, and every company names and groups its places differently. Stored as free text, that information is too vague to query or act on, so it needed a real structure.
+- **Time-slot rules change per company.** One person might be remote in the morning, in the office in the afternoon, and only for two weeks a month. One company allows that pattern for one person; another company doesn't allow it at all. The rules had to be configurable, not hard-coded.
+- **Visibility depends on groups and permissions.** Some schedules aren't public: they're visible only to a certain group of people, so every read had to respect who is allowed to see what.
+
+## My role
+
+I was a frontend engineer on a distributed team, working across the mobile app, the dashboard and the API:
+
+- **Mobile app:** helped build the React Native app where users sign in with their email and view their schedule in a selected company.
+- **Dashboard:** contributed to the dashboard the internal team used to configure the system.
+- **Design collaboration:** worked with the UI/UX team on every decision that affected the frontend implementation.
+- **Backend:** helped implement the APIs the apps needed in NestJS, and helped maintain the backend.
+- **Data pipeline:** helped set up the Kafka import queue and the sync between PostgreSQL and Neo4j, and the processes around them. The architecture decisions below were the team's.
+
+## Key decisions
+
+### A queued import for bulk users
+
+Most users didn't sign up one by one: companies imported their people in bulk, and an import could be large. We built an import system that pushed each record onto a Kafka queue and processed them one at a time, so a big import didn't hit the database all at once.
+
+### A graph replica for per-user queries
+
+The shape of the data varied a lot from one type of user to another: locations, time-slot rules, groups and permissions all linked differently. Resolving all of that through relational joins in PostgreSQL made per-user queries slow.
+
+We kept PostgreSQL as the main store and added a replica in Neo4j, where any two entities can be linked directly. Following those links is natural for a graph, so per-user queries became faster. Kafka was already part of the design, so we used it to keep PostgreSQL and Neo4j in sync.
+
+## Results
+
+- **Bulk imports went through a queue,** one record at a time, instead of loading the database in a single burst.
+- **Faster per-user queries** once schedules, groups and permissions were read from the Neo4j replica.
+- **Configurable rules per company,** so one product could support very different hybrid-work policies.
+
+## What I'd do differently
+
+### Test the code and the product from the start
+
+We didn't have the testing we needed, either in the code or at the product level. With rules that change from company to company, every new configuration was a chance to break an old one. I'd put automated tests and product-level test scenarios in place early, for exactly that reason.
+
+### Rethink the data mapping before adding a second database
+
+Running two databases at the same time was hard on the backend team. Keeping PostgreSQL and Neo4j consistent caused a lot of bugs and delays. Today I'd look harder at the data model first, and only add a second store if the model itself couldn't answer the queries fast enough.

@@ -39,6 +39,18 @@ export const caseStudies: CaseStudy[] = [
     status: "published",
   },
   {
+    slug: "flydesk-hybrid-work-scheduler",
+    title: "Scheduling who works where, company by company",
+    company: "FLYDESK",
+    period: "2021 – 2022",
+    role: "Frontend Engineer",
+    summary:
+      "Helped build a hybrid-work scheduler: a React Native app, a React configuration dashboard and a NestJS API, with queued bulk imports and a Neo4j replica for faster per-user queries.",
+    stack: ["React Native", "React", "NestJS", "PostgreSQL", "Neo4j", "Kafka"],
+    outcome: "Rules per company",
+    status: "published",
+  },
+  {
     slug: "opcadia-php-to-nextjs",
     title: "Rebuilding a legacy PHP store in Next.js",
     company: "Opcadia",

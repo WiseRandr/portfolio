@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://wiserandr.github.io/portfolio/sitemap.xml

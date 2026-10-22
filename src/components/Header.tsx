@@ -1,100 +1,39 @@
-import React, { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
-import { profile, sections } from "../data/profile";
+import Link from "next/link";
+import { profile } from "@/data/profile";
+import { publicPath } from "@/lib/paths";
+import { Container } from "./Container";
 
-const Header: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+const navItems = [
+  { href: "/#work", label: "Work" },
+  { href: "/#experience", label: "Experience" },
+  { href: "/#about", label: "About" },
+];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsMenuOpen(false);
-    }
-  };
-
+export function Header() {
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/95 backdrop-blur-sm shadow-lg" : "bg-transparent"
-      }`}
-    >
-      <nav aria-label="Main" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <button
-            onClick={() => scrollToSection("hero")}
-            className={`text-xl font-bold transition-colors ${
-              isScrolled ? "text-blue-600" : "text-white"
-            } hover:text-blue-500`}
-            aria-label="Back to top"
+    <header className="sticky top-0 z-40 border-b border-line bg-bg/85 backdrop-blur">
+      <Container className="flex h-16 items-center justify-between gap-6">
+        <Link href="/" className="whitespace-nowrap font-serif text-lg tracking-tight">
+          <span className="sm:hidden">{profile.shortName}</span>
+          <span className="hidden sm:inline">{profile.name}</span>
+        </Link>
+        <nav aria-label="Main" className="flex items-center gap-5 text-sm text-ink-muted">
+          {navItems.map((item) => (
+            <Link key={item.href} href={item.href} className="hidden hover:text-ink sm:inline">
+              {item.label}
+            </Link>
+          ))}
+          <a href={publicPath(profile.resumeFile)} className="hover:text-ink">
+            Resume
+          </a>
+          <a
+            href={`mailto:${profile.email}`}
+            className="rounded-full bg-ink px-4 py-1.5 font-medium text-bg hover:opacity-90"
           >
-            {profile.shortName}
-          </button>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
-            {sections.map(
-              (section) => (
-                <button
-                  key={section}
-                  onClick={() => scrollToSection(section)}
-                  className={`capitalize font-medium transition-colors hover:text-blue-500 ${
-                    isScrolled ? "text-gray-700" : "text-white/90"
-                  }`}
-                >
-                  {section}
-                </button>
-              )
-            )}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`md:hidden p-2 rounded-lg transition-colors ${
-              isScrolled
-                ? "text-gray-700 hover:bg-gray-100"
-                : "text-white hover:bg-white/10"
-            }`}
-            aria-label="Toggle mobile navigation menu"
-            aria-expanded={isMenuOpen}
-          >
-            {isMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-200">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              {sections.map(
-                (section) => (
-                  <button
-                    key={section}
-                    onClick={() => scrollToSection(section)}
-                    className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md capitalize"
-                  >
-                    {section}
-                  </button>
-                )
-              )}
-            </div>
-          </div>
-        )}
-      </nav>
+            Contact
+          </a>
+        </nav>
+      </Container>
     </header>
   );
-};
-
-export default Header;
+}

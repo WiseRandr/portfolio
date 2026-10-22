@@ -15,8 +15,9 @@ export const experience: Role[] = [
     period: "2024 – 2026",
     location: "France · Remote",
     highlights: [
-      "Led a team of 5 engineers delivering a multi-platform application used by 50,000+ users",
-      "Integrated the Google Maps Navigation SDK to improve route accuracy and user experience",
+      "Led a team of 5 engineers building a ride-hailing platform (rider and driver apps, NestJS API, ops dashboard) used by 50,000+ riders and drivers",
+      "Stabilised live rides with Redis for driver locations and a queue for payments and ride requests; ride completion rate reached 55%",
+      "Integrated the Google Maps Navigation SDK so drivers navigate in-app, with rerouting handled by the SDK at no extra cost",
     ],
     caseStudy: "comin-multi-platform-app",
   },

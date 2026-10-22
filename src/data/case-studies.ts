@@ -16,15 +16,15 @@ export type CaseStudy = {
 export const caseStudies: CaseStudy[] = [
   {
     slug: "comin-multi-platform-app",
-    title: "Leading a multi-platform app to 50,000+ users",
+    title: "Leading a ride-hailing platform to 50,000+ users",
     company: "COMIN",
     period: "2024 – 2026",
     role: "Lead Frontend Engineer",
     summary:
-      "Led a team of five engineers delivering a web and mobile application, and integrated the Google Maps Navigation SDK to improve route accuracy.",
-    stack: ["React", "React Native", "TypeScript", "Google Maps SDK"],
+      "Led a team of five engineers across rider and driver apps, a NestJS API and an ops dashboard, and fixed the real-time problems that came with growth.",
+    stack: ["React Native", "TypeScript", "Redux", "NestJS", "Redis", "Stripe", "Google Navigation SDK"],
     outcome: "50,000+ users",
-    status: "draft",
+    status: "published",
   },
   {
     slug: "marlow-offline-first-app",

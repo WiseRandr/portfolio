@@ -21,7 +21,6 @@ export const metadata: Metadata = {
     siteName: profile.name,
     title: `${profile.name} | ${profile.title}`,
     description: profile.summary,
-    locale: "en_CA",
     images: [{ url: "og-image.jpg", alt: `Portrait of ${profile.name}` }],
   },
   twitter: { card: "summary" },
@@ -36,7 +35,6 @@ const personJsonLd = {
   description: profile.summary,
   url: `${profile.siteUrl}/`,
   email: `mailto:${profile.email}`,
-  address: { "@type": "PostalAddress", addressLocality: "Toronto", addressRegion: "ON", addressCountry: "CA" },
   sameAs: [profile.links.github, profile.links.linkedin],
   knowsAbout: ["React", "Next.js", "TypeScript", "React Native", "Frontend architecture", "Web performance"],
 };

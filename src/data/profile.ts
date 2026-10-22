@@ -6,11 +6,12 @@ export const profile = {
   title: "Senior Frontend Engineer",
   headline: "I build frontends that hold up at scale.",
   summary:
-    "Senior frontend engineer with 8+ years shipping web and mobile products with React, Next.js, and TypeScript. Based in Toronto, working with teams across North America and Europe.",
+    "Senior frontend engineer with 8+ years shipping web and mobile products with React, Next.js, and TypeScript. Experienced working remotely with teams across North America and Europe.",
   openTo: "Open to senior frontend and full-stack roles",
   yearsOfExperience: "8+",
   email: "randriamialisonwise@gmail.com",
-  location: "Toronto, Canada",
+  // Current location is deliberately not published (CLAUDE.md §4).
+  location: "Remote",
   siteUrl: "https://wiserandr.github.io/portfolio",
   links: {
     github: "https://github.com/wiserandr",

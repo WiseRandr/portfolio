@@ -10,7 +10,7 @@ export function ContactCTA() {
             Hiring for a senior frontend or full-stack role?
           </h2>
           <p className="mt-4 max-w-xl text-lg text-ink-muted">
-            I&apos;m available now for full-time or contract work, in Toronto or remote across North America and Europe.
+            I&apos;m available now for fully remote, full-time or contract roles with teams across North America and Europe.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a

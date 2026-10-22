@@ -43,7 +43,7 @@ export const experience: Role[] = [
   },
   {
     company: "Opcadia",
-    title: "Frontend Engineer",
+    title: "Frontend Engineer (Contract)",
     period: "2020 – 2021",
     location: "France · Remote",
     highlights: [

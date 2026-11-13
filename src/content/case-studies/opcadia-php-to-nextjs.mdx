@@ -1,0 +1,66 @@
+## Context
+
+Opcadia sells personalised study plans online. Its storefront was a basic PHP website: customers couldn't configure a course themselves, and had to send their preferences in and wait for them to be validated before they could see what their plan would look like.
+
+I led the rebuild of the platform as a Next.js e-commerce application, delivered within six months.
+
+## The problem
+
+The legacy PHP site was holding back both the customer experience and the business:
+
+- **A manual, slow buying journey.** Customers had to request their preferences and wait for validation before they could preview a course plan. Every purchase depended on a back-and-forth.
+- **Poor UI and UX.** Pages were slow, and the interface couldn't support interactive choices.
+- **No component reuse.** Each change meant duplicating markup, which slowed the team down and made the site inconsistent.
+- **Weak SEO.** The site was hard for search engines to crawl and rank, limiting organic acquisition.
+
+## My role
+
+I owned the project from planning through to production:
+
+- **Scoping:** audited the existing platform, mapped every part of the customer journey that needed to change, and turned it into a concrete delivery plan.
+- **Technical direction:** chose the framework and architecture best suited to a fast, self-service buying experience.
+- **UX foundations:** designed the core user flows and the base UI for course selection and preview.
+- **Team leadership:** split the work across the team and reviewed code to keep quality and consistency high.
+- **Delivery:** deployed the application and maintained it after launch.
+
+## Key decisions
+
+### Why Next.js
+
+Next.js solved each of the platform's main problems in one framework:
+
+- **Static rendering** for fast pages and better SEO than the PHP site.
+- **API routes** to serve cached course data, so the frontend could build previews without a round trip to a manual process.
+- **A React component model** that made the UI reusable and consistent across pages.
+- **A lightweight deployment** that was simpler to run and maintain than the legacy stack.
+
+### Instant course previews without waiting for validation
+
+The biggest change for customers was removing the wait. Instead of submitting preferences and waiting for approval, customers configured their course directly on the site and saw their plan immediately. We built the preview on the frontend from cached course data served by Next.js API routes, so details appeared as soon as a customer made a choice.
+
+This turned a manual request into a self-service flow, with an interactive dashboard where customers could review their plan and follow the live status of their enrolment from the website.
+
+### Migrating with a big-bang switch
+
+We replaced the PHP site in a single cut-over rather than migrating page by page. To protect search rankings during development, the new Next.js site was blocked from search engine crawlers (via `robots.txt`) until it went live, so unfinished pages were never indexed alongside the old site.
+
+The cut-over itself was short: we shut down the PHP server and pointed the production domain at the Next.js application hosted on Vercel.
+
+## Results
+
+- **Self-service course configuration:** customers choose their own options and preferences, with no manual request needed.
+- **Instant plan previews** through an interactive dashboard, instead of waiting for validation.
+- **Live enrolment status** visible directly on the website.
+- **Better SEO** from statically rendered pages.
+- **A faster application** with a lighter, simpler deployment on Vercel.
+- **Delivered within six months.**
+
+## What I'd do differently
+
+### Design the data model before the API
+
+I focused first on the UI and UX, and didn't set a clear plan for how the cached data behind the API should be structured. As a result we ended up with several overlapping API routes, which made the pages harder to manage early on. We fixed it by regrouping the data properly in MongoDB, but a data-model plan up front would have avoided that rework.
+
+### Add tests from the start
+
+We left unit tests out at first because the early work was mostly UI and didn't change business logic. That was a mistake: about three months in, several components were changing continuously as new features landed. We then added unit tests to catch regressions. Today I'd add tests from day one for any component that's likely to keep evolving.

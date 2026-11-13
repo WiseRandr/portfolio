@@ -1,0 +1,66 @@
+## Context
+
+COMIN is a ride-hailing platform: riders book a trip, and drivers pick them up and take them where they need to go. The product is made of four parts that have to work together in real time: a rider app, a driver app, an API, and a dashboard for the operations team.
+
+I joined as Lead Frontend Engineer and led a team of five engineers. The platform grew to more than 50,000 users, riders and drivers combined.
+
+## The problem
+
+A ride is a constant conversation between two phones and a server. As usage grew, that conversation became the bottleneck:
+
+- **Driver locations fell behind.** Positions arrived late, so drivers appeared to jump across the map instead of moving smoothly.
+- **Concurrent rides slowed the whole API.** Every active ride kept the API busy, and response times dropped as more rides ran at once.
+- **Route rendering became expensive.** Drawing and redrawing routes in the apps cost performance on the device and money on map requests.
+- **A heavy API layer.** Some endpoints did too much in one call, which made the apps slow to load and the API harder to change.
+
+## My role
+
+As the lead, I owned the project and the technical decisions that came with it:
+
+- **Ownership:** learned the whole system end to end so I could make decisions across the apps, the API and the infrastructure.
+- **System design:** revised the system design when the apps started freezing and driver positions started jumping.
+- **Payments:** worked on the payment system built on Stripe.
+- **Team leadership:** split the work across the team, and maintained both mobile apps and the API.
+- **Operations dashboard:** built and maintained the dashboard the operations team used to run the service day to day.
+- **Launch:** worked directly with the owner to take the product live.
+
+## Key decisions
+
+### Redis for live driver locations
+
+Driver positions change every few seconds and are read constantly by riders waiting for a pickup. We moved live driver locations into Redis, so updates could be written and read in memory instead of competing with the rest of the API for database time. Positions stayed current, and drivers stopped jumping on the map.
+
+### NestJS for a reliable API
+
+We built the API with NestJS. Its modular structure gave each domain, such as rides, payments and users, a clear boundary, which made a heavy API easier to split up, reason about and maintain as a team.
+
+### Queueing payments and ride requests
+
+Payments and ride requests arrive in bursts, and handling each one immediately put pressure on the API at the worst possible moments. We added a queueing system so these jobs were processed in order and at a pace the API could sustain, instead of piling up as concurrent requests.
+
+### Google Maps Navigation SDK in the driver app
+
+We integrated the Google Maps Navigation SDK into the driver app. The SDK is billed per completed ride, so rerouting doesn't add cost: when a driver misses a turn or traffic changes, the SDK recalculates and redraws the route itself. That removed the expensive route rendering from our code, and drivers no longer had to leave the app for a separate navigation app in the middle of a ride.
+
+### Frontend architecture and performance
+
+- **A shared private module.** I created a private package installed by both the rider app and the driver app, so the two stayed consistent in design and behaviour without duplicating code.
+- **Redux for state management.** One predictable pattern for state across both apps, which made it easier for everyone on the team to work in any part of the code.
+- **A faster session check.** On launch, the apps used to wait on one heavy request before showing anything. I split it into smaller requests for only what each step needed, called in sequence, which cut the loading time at start-up.
+
+## Results
+
+- **Ride completion rate reached 55%.**
+- **Stable apps during rides,** where freezes had previously hurt both riders and drivers.
+- **Accurate driver positions,** rendered smoothly on the map and stored reliably.
+- **A platform used by more than 50,000 riders and drivers.**
+
+## What I'd do differently
+
+### Split the API into services
+
+A ride is heavy for the API because of the constant traffic between the driver app and the rider app. When rides slowed the API down, everything else went down with it, including the operations dashboard. Today I'd split the API into separate services, each running in its own pod, so a spike in ride traffic couldn't take out the rest of the platform.
+
+### Choose bare React Native for the driver app
+
+We built the apps with Expo. Its conveniences didn't all pay off for the driver app, which relies heavily on native features such as location and maps. I only saw this later, through monitoring. For an app that close to the device, I'd start with bare React Native.

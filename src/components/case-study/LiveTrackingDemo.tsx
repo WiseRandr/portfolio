@@ -86,13 +86,13 @@ const PANELS: Record<Kind, { title: string; description: string; map: string }> 
   delayed: {
     title: "Delayed updates",
     description:
-      "The car stays at its last received location. Here one update never arrives, so the car then jumps ahead and skips that point. The missing update is illustrative, not a confirmed cause from production.",
+      "The car stays at its last received location. One update never arrives here, so the car then jumps ahead past that point. The missing update is illustrative, not a diagnosed production cause.",
     map: "Delayed updates. The car waits at its last received location, one location update is not received, and the car then jumps ahead along the route toward the pickup point.",
   },
   smooth: {
     title: "Smooth display",
     description:
-      "Every simulated update arrives on time, and the app animates the car between them. The motion between updates is an estimate along the route, not the driver's exact position.",
+      "Every simulated update arrives on time, and the car is animated between them. That in-between movement is an estimate along the route; it doesn't recover the driver's exact position.",
     map: "Smooth display. The car moves continuously along the same route from the driver's position to the pickup point.",
   },
 };
@@ -131,8 +131,8 @@ function TrackingPanel({ kind, progress, titleId }: { kind: Kind; progress: numb
       <div className="mx-auto w-full max-w-64 rounded-[2.25rem] border border-line bg-bg p-2 shadow-sm">
         <div className="overflow-hidden rounded-[1.75rem] border border-line bg-map-street">
           <div className="flex items-center justify-between gap-2 bg-bg px-4 py-2 text-xs">
-            <span className="font-medium text-ink">Waiting for your driver</span>
-            <span className={arrived ? "text-ok" : "text-brand-violet"}>{arrived ? "Arrived" : "Live"}</span>
+            <span className="font-medium text-ink">{arrived ? "Your driver has arrived" : "Waiting for your driver"}</span>
+            {!arrived && <span className="text-brand-violet">Live</span>}
           </div>
           <svg viewBox="0 0 280 400" className="block w-full" role="img" aria-label={panel.map}>
             {BLOCKS_Y.map((row, r) =>
@@ -236,7 +236,7 @@ function TrackingPanel({ kind, progress, titleId }: { kind: Kind; progress: numb
               </div>
             </div>
             <div className="text-ink-muted">
-              {arrived ? "Your driver has arrived." : "Your driver is on the way to pick you up."}
+              {arrived ? "At the pickup point." : "On the way to pick you up."}
             </div>
           </div>
         </div>
@@ -278,6 +278,9 @@ export function LiveTrackingDemo() {
   const interacted = useRef(false);
   const [progress, setProgress] = useState(STATIC_PROGRESS);
   const [playing, setPlaying] = useState(false);
+  // False until the approach has been played once; until then the views rest
+  // at STATIC_PROGRESS.
+  const [started, setStarted] = useState(false);
   const reducedMotion = useSyncExternalStore(
     subscribeReducedMotion,
     () => window.matchMedia(REDUCED_MOTION).matches,
@@ -295,6 +298,7 @@ export function LiveTrackingDemo() {
         interacted.current = true;
         progressRef.current = 0;
         setProgress(0);
+        setStarted(true);
         setPlaying(true);
         observer.disconnect();
       },
@@ -321,20 +325,18 @@ export function LiveTrackingDemo() {
     return () => cancelAnimationFrame(frame);
   }, [playing]);
 
+  // One control: play the approach from the driver's position, pause and
+  // resume it, or replay it once the driver has arrived.
   const togglePlay = () => {
     interacted.current = true;
-    if (progressRef.current >= 1) {
+    if (!started || progressRef.current >= 1) {
       progressRef.current = 0;
       setProgress(0);
+      setStarted(true);
+      setPlaying(true);
+      return;
     }
     setPlaying((value) => !value);
-  };
-
-  const replay = () => {
-    interacted.current = true;
-    progressRef.current = 0;
-    setProgress(0);
-    setPlaying(true);
   };
 
   const arrived = progress >= 1;
@@ -344,23 +346,20 @@ export function LiveTrackingDemo() {
   return (
     <figure className="my-10" aria-labelledby={`${id}-caption`}>
       <div className="rounded-2xl border border-line bg-surface/50 p-5 sm:p-6">
-        <div className="flex flex-wrap items-center gap-3" role="group" aria-label="Simulation controls for both views">
+        <div className="flex flex-wrap items-center gap-3" role="group" aria-label="Simulation controls">
           <button type="button" onClick={togglePlay} className={buttonClass}>
-            {playing ? "Pause" : arrived ? "Play again" : "Play"}
-          </button>
-          <button type="button" onClick={replay} className={buttonClass}>
-            Replay approach
+            {playing ? "Pause" : arrived ? "Replay approach" : started ? "Resume" : "Play approach"}
           </button>
           <span className="text-sm text-ink-muted">Both views follow the same simulated timeline.</span>
         </div>
-        {reducedMotion && !playing && (
+        {reducedMotion && !started && (
           <div className="mt-3 text-sm text-ink-faint">
-            Motion is paused because your device prefers reduced motion. Both views show the same moment; press Play
-            to run the comparison.
+            Motion is off because your device prefers reduced motion. Both views show the same moment, just after the
+            delayed view skipped a missing update. Press Play approach to run it.
           </div>
         )}
         <div aria-live="polite" className="sr-only">
-          {arrived ? "Both views: your driver has arrived." : ""}
+          {arrived ? "Your driver has arrived in both views." : ""}
         </div>
 
         <div className="mt-6 grid gap-10 sm:grid-cols-2 sm:gap-6">
@@ -372,7 +371,7 @@ export function LiveTrackingDemo() {
       </div>
       <figcaption id={`${id}-caption`} className="mt-3 text-sm leading-relaxed text-ink-faint">
         Illustrative reconstruction—not the production interface or measured performance. Fictional data and
-        simulated motion explain the tracking problem described in this case study.
+        simulated motion explain the tracking problem.
       </figcaption>
     </figure>
   );

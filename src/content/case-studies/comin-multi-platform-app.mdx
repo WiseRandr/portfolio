@@ -1,80 +1,82 @@
-## Context
+## Overview
 
-COMIN is a ride-hailing platform: riders book a trip, and drivers pick them up and take them where they need to go. The product is made of four parts that have to work together in real time: a rider app, a driver app, an API, and a dashboard for the operations team.
+COMIN is a ride-hailing platform: riders book a trip, and drivers pick them up and take them where they need to go. It is made of four parts that work together in real time: a rider app, a driver app, an API, and a dashboard for the operations team.
 
-I joined as Lead Frontend Engineer and led a team of five engineers. The platform grew to more than 50,000 users, riders and drivers combined.
+I joined as Lead Frontend Engineer (part-time) and led a team of five engineers across all four parts. Frontend is my specialism; on this project I also designed and built the live-location and queueing changes described below. I was responsible for engineering delivery and reliability as the operational load changed; I didn't own rider or driver acquisition, or marketing.
 
-## Making live driver tracking understandable
-
-For a rider waiting on a pickup, the car on the map is what they watch. When driver positions arrived late, cars appeared to jump across the map instead of moving smoothly. The illustration below shows that difference on a fictional pickup, with both views running on the same timeline.
-
-<LiveTrackingDemo />
-
-It compares what a rider sees; it doesn't replay production behaviour. How current the location data is and how the app draws movement on screen are separate concerns; the Redis decision below is about the first.
+**Operating context.** During the early production period, the platform had approximately 1,000 rider accounts and 1,000 driver accounts. On a typical day, roughly 50–70 riders were active and around 170 drivers connected over the course of the day, not all at the same time, while they waited for requests. These are approximate figures from memory, not audited analytics or current totals.
 
 ## The problem
 
-A ride is a constant conversation between two phones and a server. As usage grew, that conversation became the bottleneck:
+A ride is a constant exchange between two phones and a server. In early production, that exchange became the bottleneck:
 
-- **Driver locations fell behind.** Positions arrived late, so drivers appeared to jump across the map instead of moving smoothly.
-- **Concurrent rides slowed the whole API.** Every active ride kept the API busy, and response times dropped as more rides ran at once.
-- **Route rendering became expensive.** Drawing and redrawing routes in the apps cost performance on the device and money on map requests.
-- **A heavy API layer.** Some endpoints did too much in one call, which made the apps slow to load and the API harder to change.
+- **Driver locations fell behind.** Positions reached riders late, so cars appeared to jump across the map instead of moving smoothly.
+- **Apps froze during rides,** for riders and drivers.
+- **Concurrent rides slowed the whole API.** Every active ride kept the API busy, and response times grew as more rides ran at once. AWS database query statistics and Grafana logs showed the slowdown.
+- **Route rendering was expensive.** Drawing and redrawing routes in the apps cost performance on the device and money on map requests.
+- **Start-up loaded everything at once.** On launch, the apps waited for the user's full profile and history before showing anything.
+
+## Keeping the driver's position current on the rider's map
+
+While a rider waits for a pickup, the car on the map is what they watch. When location updates arrive late or not at all, the map can only show the last position it received, so the car waits and then jumps. The illustration compares that with timely updates on the same fictional pickup.
+
+<LiveTrackingDemo />
+
+How current the location data is and how the app draws movement between updates are separate concerns. The Redis decision below is about the first.
 
 ## My role
 
-As the lead, I owned the project and the technical decisions that came with it:
-
-- **Ownership:** learned the whole system end to end so I could make decisions across the apps, the API and the infrastructure.
-- **System design:** revised the system design when the apps started freezing and driver positions started jumping.
-- **Payments:** worked on the payment system built on Stripe.
-- **Team leadership:** split the work across the team, and maintained both mobile apps and the API.
+- **Team leadership:** led five engineers and split the work across the team.
+- **System design:** revised the design when the apps started freezing and driver positions started jumping.
+- **Built myself:** the Redis live-location store and driver-position flow, and the job queues for ride requests, driver acceptance and payments.
+- **Mobile apps:** maintained the rider and driver apps, created the shared module they both use, and reworked the start-up flow. I also helped with the Navigation SDK integration a teammate built.
+- **API and payments:** maintained the NestJS API and worked on the Stripe payment system.
 - **Operations dashboard:** built and maintained the dashboard the operations team used to run the service day to day.
-- **Launch:** worked directly with the owner to take the product live.
+- **Launch:** took the product live with the owner.
 
-## Key decisions
+## Key decisions and trade-offs
 
-### Redis for live driver locations
+### Redis for live driver locations, with the database as fallback
 
-Driver positions change every few seconds and are read constantly by riders waiting for a pickup. We moved live driver locations into Redis, so updates could be written and read in memory instead of competing with the rest of the API for database time. Location snapshots were also persisted to the database at a lower frequency, for durable storage. Positions stayed current, which was the data side of stopping drivers jumping on the map.
+Driver positions change every few seconds and are read constantly by riders waiting for a pickup. Writing and reading them through the main database meant they competed with the rest of the API for database time. I moved live driver locations into Redis, so during normal operation the API writes and reads each driver's latest position in memory. A scheduled job persists those positions from Redis to the database every 15 minutes. If Redis is unavailable, the API writes incoming location updates directly to the database and reads locations from there.
+
+The trade-offs are one more service to operate and a fallback that shifts load rather than removing it. During a Redis outage, the API reads and writes driver locations directly in the database. This preserves location updates but returns that high-frequency workload to the main database.
 
 <LocationFlowDiagram />
 
-As the lead, I revised the system design when driver positions started jumping. In the flow above, the API writes each driver's latest location to Redis and reads it back to supply the rider app: Redis handles fast access to live positions. The database handles durability, through periodic/coalesced persistence of location snapshots. The database retains the last persisted location if Redis is unavailable; it may be older than the latest live position.
+### Queues for ride requests, driver acceptance and payments
 
-### NestJS for a reliable API
-
-We built the API with NestJS. Its modular structure gave each domain, such as rides, payments and users, a clear boundary, which made a heavy API easier to split up, reason about and maintain as a team.
-
-### Queueing payments and ride requests
-
-Payments and ride requests arrive in bursts, and handling each one immediately put pressure on the API at the worst possible moments. We added a queueing system so these jobs were processed in order and at a pace the API could sustain, instead of piling up as concurrent requests.
+Ride requests and payments arrive in bursts, and handling each one the moment it arrived put pressure on the API at the busiest times. I moved them onto job queues. Ride requests are processed several at a time, and a job that crashes can be restarted. Driver acceptance has its own queue, processed one job at a time, to serialize competing driver-acceptance requests. That lowers acceptance-processing concurrency in exchange for simpler coordination. Serializing the jobs reduces concurrent acceptance handling; on its own, it isn't proof that a ride can never be assigned twice.
 
 ### Google Maps Navigation SDK in the driver app
 
-We integrated the Google Maps Navigation SDK into the driver app. The SDK is billed per completed ride, so rerouting doesn't add cost: when a driver misses a turn or traffic changes, the SDK recalculates and redraws the route itself. That removed the expensive route rendering from our code, and drivers no longer had to leave the app for a separate navigation app in the middle of a ride.
+A teammate embedded the Google Maps Navigation SDK in the driver app, and I helped with the integration later. Drivers get turn-by-turn guidance without switching to a separate navigation app mid-ride, and the SDK draws the route and recalculates it when a driver misses a turn or traffic changes, which took route rendering and rerouting out of our own code. COMIN's agreement with Google billed navigation per completed ride, so rerouting during a ride added no cost; that was specific to COMIN's contract, as [Google's standard pricing](https://developers.google.com/maps/documentation/navigation/android-sdk/usage-and-billing) bills per requested destination. The cost is a dependency on a native SDK, with its own pricing terms and upgrade cycle.
 
-### Frontend architecture and performance
+### NestJS modules for the API
 
-- **A shared private module.** I created a private package installed by both the rider app and the driver app, so the two stayed consistent in design and behaviour without duplicating code.
-- **Redux for state management.** One predictable pattern for state across both apps, which made it easier for everyone on the team to work in any part of the code.
-- **A faster session check.** On launch, the apps used to wait on one heavy request before showing anything. I split it into smaller requests for only what each step needed, called in sequence, which cut the loading time at start-up.
+We built the API with NestJS. Its modules gave each domain, such as rides, payments and users, a clear boundary, which made a heavy API easier to split up, reason about and maintain as a team.
+
+### Frontend architecture and start-up
+
+- **A shared private module.** I created a private package installed by both the rider app and the driver app, so the two stay consistent in design and behaviour without duplicating code.
+- **Redux for state management.** One predictable pattern for state across both apps, so anyone on the team could work in any part of the code.
+- **A lighter first screen.** The first screen only needs the user's name, email and last-used location, but the apps used to fetch everything on launch, including their rating, recent rides, and news and offers. I changed start-up to load just those details first and the rest afterwards, which made start-up faster.
 
 ## Results
 
-- **Ride completion rate reached 55%.**
-- **Stable apps during rides,** where freezes had previously hurt both riders and drivers.
-- **Accurate driver positions,** rendered smoothly on the map and stored reliably.
-- **A platform used by more than 50,000 riders and drivers.**
+- **More completed rides:** within two months, completed rides went from 4–5 to 20–30 a day, on about 50 ride requests a day. The technical changes and the marketing team's outreach to users both contributed, so this is the product's overall result, not a measurement of any single change.
+- **Fewer freezes, more timely positions:** following the changes, we observed fewer freezes during rides and more timely driver-location updates on riders' maps. These were qualitative observations; I no longer have the reporting window or retained measurements.
+- **Faster start-up:** both apps show the first screen once its own details arrive, instead of waiting for the full profile and history.
+- **In-app navigation:** drivers no longer leave the app to navigate.
 
 ## What I'd do differently
 
 ### Isolate ride workloads with independently deployed services
 
-A ride is heavy for the API because of the constant traffic between the driver app and the rider app. The NestJS API was already organized into modules, but they all ran in the same deployment and shared its runtime resources. When rides slowed the API down, everything else went down with it, including the operations dashboard. Today I'd deploy the ride workload as its own service, with its own resources and scaling, so a spike in ride traffic would have much less effect on the rest of the platform. Shared dependencies, such as the database, would still need protecting. The trade-off is more to run: more deployments to manage, observability across services, and network calls where modules used to call each other in process.
+The NestJS API was organized into modules, but they all ran in the same deployment and shared its runtime resources. AWS database query statistics and Grafana logs showed the API, and the operations dashboard with it, slowing down when ride traffic was high. What they didn't establish was which shared resource was the constraint.
+
+Before extracting anything, I'd profile to separate two possible causes. If profiling confirmed that shared runtime capacity contributed, deploying the ride workload as its own service, with its own resource allocation and scaling, could leave the rest of the platform more headroom during a spike. If the bottleneck was the shared database, a separate deployment wouldn't fix it on its own; that would need its own measures.
+
+Services aren't free: they bring more deployments to operate, tracing and monitoring across service boundaries, and network calls that can fail where modules used to call each other in process.
 
 <ArchitectureComparison />
-
-### Choose bare React Native for the driver app
-
-We built the apps with Expo. Its conveniences didn't all pay off for the driver app, which relies heavily on native features such as location and maps. I only saw this later, through monitoring. For an app that close to the device, I'd start with bare React Native.

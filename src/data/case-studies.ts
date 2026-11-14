@@ -16,14 +16,14 @@ export type CaseStudy = {
 export const caseStudies: CaseStudy[] = [
   {
     slug: "comin-multi-platform-app",
-    title: "Leading a ride-hailing platform to 50,000+ users",
+    title: "Leading the apps and real-time backend of a ride-hailing platform",
     company: "COMIN",
     period: "2024 – 2026",
-    role: "Lead Frontend Engineer",
+    role: "Lead Frontend Engineer (part-time)",
     summary:
-      "Led a team of five engineers across rider and driver apps, a NestJS API and an ops dashboard, and fixed the real-time problems that came with growth.",
+      "Led a team of five engineers on a ride-hailing platform with ~2,000 rider and driver accounts: rider and driver apps, a NestJS API and an ops dashboard. Rebuilt live driver tracking and request handling as operational load changed.",
     stack: ["React Native", "TypeScript", "Redux", "NestJS", "Redis", "Stripe", "Google Navigation SDK"],
-    outcome: "50,000+ users",
+    outcome: "Completed rides: 4–5 → 20–30 a day",
     status: "published",
   },
   {

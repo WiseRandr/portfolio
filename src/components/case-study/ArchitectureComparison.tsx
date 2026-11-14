@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
 
 // A conceptual, retrospective comparison: how the COMIN API was deployed, and
-// how I'd isolate ride workloads today. No gateway, broker, database layout or
+// how I'd isolate ride workloads if profiling confirmed shared runtime
+// contention. The load scenario is hypothetical. No gateway, broker, database layout or
 // replica counts are drawn, because none of them are part of the proposal.
 
 type Rect = { x: number; y: number; w: number; h: number };
@@ -100,15 +101,17 @@ export function ArchitectureComparison() {
     <figure className="my-8" aria-labelledby="architecture-comparison-caption">
       <div className="rounded-2xl border border-line bg-surface/50 p-4 sm:p-6">
         <div className="text-sm text-ink-muted">
-          Same scenario on both sides: a spike in ride traffic. Pink marks the ride workload.
+          <span className="font-medium text-ink">Conceptual comparison if profiling confirms shared runtime contention.</span>{" "}
+          Both sides show the same hypothetical spike in ride traffic. Pink marks the ride workload; capacity bars are
+          schematic, not measured utilization.
         </div>
         <div className="mt-5 grid gap-10 sm:grid-cols-2 sm:gap-6">
           <Panel
             title="Implemented: modules in a shared API deployment"
             points={[
-              "Rides, payments and users are separate modules, deployed together.",
-              "A ride spike uses runtime capacity the other modules also need, so the API and the ops dashboard slow down.",
-              "Every instance runs every module, so they can only scale together.",
+              "Implemented: rides, payments and users are separate modules, deployed and scaled together.",
+              "Observed: the API and the ops dashboard slowed down when ride traffic was high.",
+              "Hypothesis to profile: if ride processing saturates shared runtime capacity, other API workloads compete for the same resources.",
             ]}
           >
             <Clients dashboardStrained />
@@ -123,17 +126,18 @@ export function ArchitectureComparison() {
             <Box x={202} y={124} w={74} h={36} label="Users" />
             <Capacity x={24} y={210} w={252} title="Shared runtime capacity" used={0.78} other={0.16} />
             <text x={24} y={262} fontSize={11.5} className="fill-ink-muted">
-              <tspan x={24}>The ride spike uses most of it;</tspan>
-              <tspan x={24} dy={16}>all modules scale together.</tspan>
+              <tspan x={24}>If rides saturate it, other</tspan>
+              <tspan x={24} dy={16}>modules compete for it.</tspan>
             </text>
           </Panel>
 
           <Panel
-            title="Proposed: independently deployed services"
+            title="Proposed, not deployed: independently deployed services"
             points={[
-              "Ride processing runs in its own deployment, with its own resources and scaling.",
-              "A ride spike draws on the ride service's capacity, so other workloads and the dashboard contend less for runtime.",
-              "Shared dependencies, such as a database or synchronous calls, can still spread load and need protection.",
+              "Ride processing would run in its own deployment, with its own resource allocation and scaling.",
+              "If runtime contention is confirmed, a ride spike would draw mainly on the ride service's capacity, leaving other workloads more headroom.",
+              "Shared dependencies, such as a database or synchronous calls, can still spread load, so separation doesn't guarantee isolation.",
+              "Costs: more deployments to operate, monitoring and tracing across services, and network calls that can fail.",
             ]}
           >
             <Clients />
@@ -144,8 +148,8 @@ export function ArchitectureComparison() {
             <Box x={22} y={124} w={112} h={36} label="Rides" load />
             <Capacity x={22} y={210} w={112} title="Own capacity" used={0.78} />
             <text x={22} y={262} fontSize={11.5} className="fill-ink-muted">
-              <tspan x={22}>Scales on its own</tspan>
-              <tspan x={22} dy={16}>with ride traffic.</tspan>
+              <tspan x={22}>Can scale on its</tspan>
+              <tspan x={22} dy={16}>own with rides.</tspan>
             </text>
 
             <Boundary x={156} y={90} w={134} h={198} label="Other workloads" />
@@ -153,15 +157,15 @@ export function ArchitectureComparison() {
             <Box x={168} y={162} w={110} h={32} label="Users" />
             <Capacity x={168} y={210} w={110} title="Own capacity" used={0} other={0.3} />
             <text x={168} y={262} fontSize={11.5} className="fill-ink-muted">
-              <tspan x={168}>Less contention</tspan>
-              <tspan x={168} dy={16}>from ride spikes.</tspan>
+              <tspan x={168}>Less contention,</tspan>
+              <tspan x={168} dy={16}>if confirmed.</tspan>
             </text>
           </Panel>
         </div>
       </div>
       <figcaption id="architecture-comparison-caption" className="mt-3 text-sm leading-relaxed text-ink-faint">
-        Retrospective architecture proposal—not the deployed system. Independent deployments reduce shared runtime
-        contention; shared dependencies still require protection.
+        Retrospective architecture proposal—not the deployed system. Independent deployments can reduce shared
+        runtime contention if profiling confirms it; shared dependencies still require protection.
       </figcaption>
     </figure>
   );

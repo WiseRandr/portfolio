@@ -15,9 +15,9 @@ export const experience: Role[] = [
     period: "2024 – 2026",
     location: "France · Remote",
     highlights: [
-      "Led a team of 5 engineers building a ride-hailing platform (rider and driver apps, NestJS API, ops dashboard) used by 50,000+ riders and drivers",
-      "Stabilised live rides with Redis for driver locations and a queue for payments and ride requests; ride completion rate reached 55%",
-      "Integrated the Google Maps Navigation SDK so drivers navigate in-app, with rerouting handled by the SDK at no extra cost",
+      "Led a team of 5 engineers building a ride-hailing platform (rider and driver apps, NestJS API, ops dashboard) with ~2,000 rider and driver accounts",
+      "Reworked live-ride handling with Redis for driver locations and job queues for ride requests, driver acceptance and payments; within two months, alongside marketing outreach, completed rides rose from 4–5 to 20–30 a day",
+      "Helped integrate the Google Maps Navigation SDK so drivers navigate in-app, with rerouting at no extra cost under COMIN's per-ride billing",
     ],
     caseStudy: "comin-multi-platform-app",
   },

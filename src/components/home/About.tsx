@@ -12,7 +12,7 @@ export function About() {
             <p>
               I&apos;ve spent eight years building React and React Native products for remote teams in France,
               Cyprus, and Hong Kong. Most recently I led five engineers building a ride-hailing platform (rider and
-              driver apps, an API, and an ops dashboard) used by more than 50,000 riders and drivers.
+              driver apps, an API, and an ops dashboard) with about 2,000 rider and driver accounts.
             </p>
             <p>
               My work extends beyond the UI. I&apos;ve led a migration from legacy PHP to Next.js and collaborate closely

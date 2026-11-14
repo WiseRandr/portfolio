@@ -1,0 +1,168 @@
+import type { ReactNode } from "react";
+
+// A conceptual, retrospective comparison: how the COMIN API was deployed, and
+// how I'd isolate ride workloads today. No gateway, broker, database layout or
+// replica counts are drawn, because none of them are part of the proposal.
+
+type Rect = { x: number; y: number; w: number; h: number };
+
+function Box({ x, y, w, h, label, load }: Rect & { label: string; load?: boolean }) {
+  return (
+    <g>
+      <rect
+        x={x}
+        y={y}
+        width={w}
+        height={h}
+        rx={9}
+        strokeWidth={load ? 2 : 1.5}
+        className={load ? "fill-brand-violet-soft stroke-brand-pink" : "fill-bg stroke-ink-faint"}
+      />
+      <text x={x + w / 2} y={y + h / 2 + 4.5} textAnchor="middle" fontSize={12.5} fontWeight={600} className="fill-ink">
+        {label}
+      </text>
+    </g>
+  );
+}
+
+function Boundary({ x, y, w, h, label }: Rect & { label: string }) {
+  return (
+    <g>
+      <rect x={x} y={y} width={w} height={h} rx={14} fill="none" strokeWidth={1.5} strokeDasharray="6 4" className="stroke-ink-muted" />
+      <text x={x + 12} y={y + 21} fontSize={12} fontWeight={600} className="fill-ink">
+        {label}
+      </text>
+    </g>
+  );
+}
+
+function Capacity({ x, y, w, title, used, other = 0 }: { x: number; y: number; w: number; title: string; used: number; other?: number }) {
+  return (
+    <g>
+      <text x={x} y={y} fontSize={11.5} className="fill-ink-muted">
+        {title}
+      </text>
+      <rect x={x} y={y + 8} width={w} height={12} rx={6} className="fill-line" />
+      {used > 0 && <rect x={x} y={y + 8} width={w * used} height={12} rx={6} className="fill-brand-pink" />}
+      {other > 0 && <rect x={x + w * used + 2} y={y + 8} width={w * other} height={12} rx={6} className="fill-ink-faint" />}
+    </g>
+  );
+}
+
+function Down({ x }: { x: number }) {
+  return (
+    <path d={`M${x} 52 V86 M${x - 4} 80 L${x} 86 L${x + 4} 80`} fill="none" strokeWidth={1.5} className="stroke-ink-muted" />
+  );
+}
+
+function Clients({ dashboardStrained }: { dashboardStrained?: boolean }) {
+  return (
+    <>
+      <Box x={10} y={10} w={170} h={40} label="Rider & driver apps" />
+      <rect
+        x={190}
+        y={10}
+        width={100}
+        height={40}
+        rx={9}
+        strokeWidth={dashboardStrained ? 2 : 1.5}
+        strokeDasharray={dashboardStrained ? "4 3" : undefined}
+        className={dashboardStrained ? "fill-bg stroke-brand-pink" : "fill-bg stroke-ink-faint"}
+      />
+      <text x={240} y={34.5} textAnchor="middle" fontSize={12.5} fontWeight={600} className="fill-ink">
+        Ops dashboard
+      </text>
+    </>
+  );
+}
+
+function Panel({ title, points, children }: { title: string; points: string[]; children: ReactNode }) {
+  return (
+    <div>
+      <div className="text-sm font-medium text-ink">{title}</div>
+      <svg viewBox="0 0 300 300" className="mt-3 block w-full max-w-sm" aria-hidden="true">
+        {children}
+      </svg>
+      <ul className="mt-3 space-y-1.5" role="list">
+        {points.map((point) => (
+          <li key={point} className="flex gap-2 text-sm leading-relaxed text-ink-muted">
+            <span aria-hidden="true">–</span>
+            <span>{point}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export function ArchitectureComparison() {
+  return (
+    <figure className="my-8" aria-labelledby="architecture-comparison-caption">
+      <div className="rounded-2xl border border-line bg-surface/50 p-4 sm:p-6">
+        <div className="text-sm text-ink-muted">
+          Same scenario on both sides: a spike in ride traffic. Pink marks the ride workload.
+        </div>
+        <div className="mt-5 grid gap-10 sm:grid-cols-2 sm:gap-6">
+          <Panel
+            title="Implemented: modules in a shared API deployment"
+            points={[
+              "Rides, payments and users are separate modules, deployed together.",
+              "A ride spike uses runtime capacity the other modules also need, so the API and the ops dashboard slow down.",
+              "Every instance runs every module, so they can only scale together.",
+            ]}
+          >
+            <Clients dashboardStrained />
+            <text x={262} y={68} textAnchor="middle" fontSize={11} className="fill-brand-pink">
+              slower
+            </text>
+            <Down x={95} />
+            <Down x={215} />
+            <Boundary x={10} y={90} w={280} h={198} label="Shared API deployment" />
+            <Box x={24} y={124} w={80} h={36} label="Rides" load />
+            <Box x={110} y={124} w={86} h={36} label="Payments" />
+            <Box x={202} y={124} w={74} h={36} label="Users" />
+            <Capacity x={24} y={210} w={252} title="Shared runtime capacity" used={0.78} other={0.16} />
+            <text x={24} y={262} fontSize={11.5} className="fill-ink-muted">
+              <tspan x={24}>The ride spike uses most of it;</tspan>
+              <tspan x={24} dy={16}>all modules scale together.</tspan>
+            </text>
+          </Panel>
+
+          <Panel
+            title="Proposed: independently deployed services"
+            points={[
+              "Ride processing runs in its own deployment, with its own resources and scaling.",
+              "A ride spike draws on the ride service's capacity, so other workloads and the dashboard contend less for runtime.",
+              "Shared dependencies, such as a database or synchronous calls, can still spread load and need protection.",
+            ]}
+          >
+            <Clients />
+            <Down x={75} />
+            <Down x={168} />
+            <Down x={240} />
+            <Boundary x={10} y={90} w={136} h={198} label="Ride service" />
+            <Box x={22} y={124} w={112} h={36} label="Rides" load />
+            <Capacity x={22} y={210} w={112} title="Own capacity" used={0.78} />
+            <text x={22} y={262} fontSize={11.5} className="fill-ink-muted">
+              <tspan x={22}>Scales on its own</tspan>
+              <tspan x={22} dy={16}>with ride traffic.</tspan>
+            </text>
+
+            <Boundary x={156} y={90} w={134} h={198} label="Other workloads" />
+            <Box x={168} y={124} w={110} h={32} label="Payments" />
+            <Box x={168} y={162} w={110} h={32} label="Users" />
+            <Capacity x={168} y={210} w={110} title="Own capacity" used={0} other={0.3} />
+            <text x={168} y={262} fontSize={11.5} className="fill-ink-muted">
+              <tspan x={168}>Less contention</tspan>
+              <tspan x={168} dy={16}>from ride spikes.</tspan>
+            </text>
+          </Panel>
+        </div>
+      </div>
+      <figcaption id="architecture-comparison-caption" className="mt-3 text-sm leading-relaxed text-ink-faint">
+        Retrospective architecture proposal—not the deployed system. Independent deployments reduce shared runtime
+        contention; shared dependencies still require protection.
+      </figcaption>
+    </figure>
+  );
+}

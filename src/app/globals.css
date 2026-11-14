@@ -12,6 +12,13 @@
   --accent-soft: #e7ecfc;
   --ok: #1d7a4f;
   --ok-soft: #e3f3ea;
+  /* Case-study illustrations only: restrained violet and pink, plus map tones. */
+  --brand-violet: #6a3fd6;
+  --brand-violet-soft: #efe9fc;
+  --brand-pink: #c93a78;
+  --map-street: #e6e3dd;
+  --map-block: #f7f5f1;
+  --map-park: #e2ebdd;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -26,6 +33,12 @@
     --accent-soft: #1c2240;
     --ok: #6fd6a2;
     --ok-soft: #12291e;
+    --brand-violet: #a98bff;
+    --brand-violet-soft: #241c3d;
+    --brand-pink: #f07aac;
+    --map-street: #2c2c34;
+    --map-block: #1f1f25;
+    --map-park: #1e2a22;
   }
 }
 
@@ -40,6 +53,12 @@
   --color-accent-soft: var(--accent-soft);
   --color-ok: var(--ok);
   --color-ok-soft: var(--ok-soft);
+  --color-brand-violet: var(--brand-violet);
+  --color-brand-violet-soft: var(--brand-violet-soft);
+  --color-brand-pink: var(--brand-pink);
+  --color-map-street: var(--map-street);
+  --color-map-block: var(--map-block);
+  --color-map-park: var(--map-park);
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-newsreader), ui-serif, Georgia, serif;
 }

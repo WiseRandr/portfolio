@@ -1,5 +1,8 @@
 import type { ReactNode } from "react";
 import type { MDXComponents } from "mdx/types";
+import { ArchitectureComparison } from "@/components/case-study/ArchitectureComparison";
+import { LiveTrackingDemo } from "@/components/case-study/LiveTrackingDemo";
+import { LocationFlowDiagram } from "@/components/case-study/LocationFlowDiagram";
 
 // Marks text Wise still has to write. Rendered visibly so a draft can never
 // be mistaken for finished content.
@@ -13,5 +16,5 @@ function Placeholder({ children }: { children: ReactNode }) {
 }
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
-  return { Placeholder, ...components };
+  return { Placeholder, LiveTrackingDemo, LocationFlowDiagram, ArchitectureComparison, ...components };
 }

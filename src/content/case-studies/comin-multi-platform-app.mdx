@@ -4,6 +4,14 @@ COMIN is a ride-hailing platform: riders book a trip, and drivers pick them up a
 
 I joined as Lead Frontend Engineer and led a team of five engineers. The platform grew to more than 50,000 users, riders and drivers combined.
 
+## Making live driver tracking understandable
+
+For a rider waiting on a pickup, the car on the map is what they watch. When driver positions arrived late, cars appeared to jump across the map instead of moving smoothly. The illustration below shows that difference on a fictional pickup, with both views running on the same timeline.
+
+<LiveTrackingDemo />
+
+It compares what a rider sees; it doesn't replay production behaviour. How current the location data is and how the app draws movement on screen are separate concerns; the Redis decision below is about the first.
+
 ## The problem
 
 A ride is a constant conversation between two phones and a server. As usage grew, that conversation became the bottleneck:
@@ -28,7 +36,11 @@ As the lead, I owned the project and the technical decisions that came with it:
 
 ### Redis for live driver locations
 
-Driver positions change every few seconds and are read constantly by riders waiting for a pickup. We moved live driver locations into Redis, so updates could be written and read in memory instead of competing with the rest of the API for database time. Positions stayed current, and drivers stopped jumping on the map.
+Driver positions change every few seconds and are read constantly by riders waiting for a pickup. We moved live driver locations into Redis, so updates could be written and read in memory instead of competing with the rest of the API for database time. Location snapshots were also persisted to the database at a lower frequency, for durable storage. Positions stayed current, which was the data side of stopping drivers jumping on the map.
+
+<LocationFlowDiagram />
+
+As the lead, I revised the system design when driver positions started jumping. In the flow above, the API writes each driver's latest location to Redis and reads it back to supply the rider app: Redis handles fast access to live positions. The database handles durability, through periodic/coalesced persistence of location snapshots. The database retains the last persisted location if Redis is unavailable; it may be older than the latest live position.
 
 ### NestJS for a reliable API
 
@@ -57,9 +69,11 @@ We integrated the Google Maps Navigation SDK into the driver app. The SDK is bil
 
 ## What I'd do differently
 
-### Split the API into services
+### Isolate ride workloads with independently deployed services
 
-A ride is heavy for the API because of the constant traffic between the driver app and the rider app. When rides slowed the API down, everything else went down with it, including the operations dashboard. Today I'd split the API into separate services, each running in its own pod, so a spike in ride traffic couldn't take out the rest of the platform.
+A ride is heavy for the API because of the constant traffic between the driver app and the rider app. The NestJS API was already organized into modules, but they all ran in the same deployment and shared its runtime resources. When rides slowed the API down, everything else went down with it, including the operations dashboard. Today I'd deploy the ride workload as its own service, with its own resources and scaling, so a spike in ride traffic would have much less effect on the rest of the platform. Shared dependencies, such as the database, would still need protecting. The trade-off is more to run: more deployments to manage, observability across services, and network calls where modules used to call each other in process.
+
+<ArchitectureComparison />
 
 ### Choose bare React Native for the driver app
 

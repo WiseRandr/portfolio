@@ -17,9 +17,13 @@ export function Header() {
           <span className="sm:hidden">{profile.shortName}</span>
           <span className="hidden sm:inline">{profile.name}</span>
         </Link>
-        <nav aria-label="Main" className="flex items-center gap-5 text-sm text-ink-muted">
+        <nav aria-label="Main" className="flex items-center gap-4 text-sm text-ink-muted sm:gap-5">
           {navItems.map((item) => (
-            <Link key={item.href} href={item.href} className="hidden hover:text-ink sm:inline">
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`hover:text-ink ${item.label === "Work" ? "" : "hidden sm:inline"}`}
+            >
               {item.label}
             </Link>
           ))}

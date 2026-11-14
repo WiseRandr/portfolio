@@ -27,7 +27,7 @@ export function Experience() {
                     href={`/work/${role.caseStudy}/`}
                     className="mt-3 inline-block text-sm font-medium text-accent hover:underline"
                   >
-                    Read the case study <span aria-hidden="true">→</span>
+                    Read the case study<span className="sr-only">: {role.company}</span> <span aria-hidden="true">→</span>
                   </Link>
                 )}
               </div>

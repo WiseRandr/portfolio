@@ -10,13 +10,14 @@ export function About() {
           <SectionHeading id="about-title" eyebrow="About" title="Frontend depth, full-stack reach" />
           <div className="space-y-4 text-lg leading-relaxed text-ink-muted">
             <p>
-              I&apos;ve spent eight years building React and React Native products for remote teams in France,
-              Cyprus, and Hong Kong. Most recently I led five engineers building a ride-hailing platform (rider and
-              driver apps, an API, and an ops dashboard) with about 2,000 rider and driver accounts.
+              I&apos;ve spent more than eight years building web and mobile products, the last six with remote teams
+              based in France, Cyprus and Hong Kong. Most recently I led five engineers on a ride-hailing platform:
+              rider and driver apps, a NestJS API and an ops dashboard.
             </p>
             <p>
-              My work extends beyond the UI. I&apos;ve led a migration from legacy PHP to Next.js and collaborate closely
-              with backend teams on API design, data flows, deployment, and technical decisions across the stack.
+              My depth is the frontend: React, Next.js, React Native and TypeScript. My work also reaches behind it. I
+              led a legacy PHP store&apos;s rebuild in Next.js, built offline workflows for a crew app, and designed the
+              live-location store and job queues behind COMIN&apos;s rides.
             </p>
           </div>
           <div className="mt-10 space-y-5">

@@ -73,7 +73,7 @@ const STEPS = [
   {
     short: "Submitted",
     title: "Submitted to Marlow",
-    body: "All four requests have reached Marlow's service for processing, and the submitted requests are cleared from the device. This confirmation does not mean the bank transfers have completed.",
+    body: "Marlow's service has confirmed it received all four requests, so the app clears them from the device. This confirmation does not mean the bank transfers have completed.",
     start: 25400,
     end: 29000,
   },

@@ -11,23 +11,23 @@ export type Role = {
 export const experience: Role[] = [
   {
     company: "COMIN",
-    title: "Lead Frontend Engineer (Part-time)",
+    title: "Lead Frontend Engineer (part-time)",
     period: "2024 – 2026",
     location: "France · Remote",
     highlights: [
       "Led a team of 5 engineers building a ride-hailing platform (rider and driver apps, NestJS API, ops dashboard) with ~2,000 rider and driver accounts",
       "Reworked live-ride handling with Redis for driver locations and job queues for ride requests, driver acceptance and payments; within two months, alongside marketing outreach, completed rides rose from 4–5 to 20–30 a day",
-      "Helped integrate the Google Maps Navigation SDK so drivers navigate in-app, with rerouting at no extra cost under COMIN's per-ride billing",
+      "Helped integrate the Google Maps Navigation SDK so drivers navigate in-app, with route drawing and rerouting handled by the SDK",
     ],
     caseStudy: "comin-multi-platform-app",
   },
   {
     company: "Marlow Navigation",
-    title: "Frontend Engineer (Contract)",
+    title: "Frontend Engineer (contract)",
     period: "2022 – 2026",
     location: "Cyprus · Remote",
     highlights: [
-      "Built features for a mobile app used by seafarers and captains to manage sailing documents, payslips, voyage agendas and allotments, with offline access to downloaded documents and allotment requests held until the app is reopened online",
+      "Built features for a React Native app used by seafarers and captains (sailing documents, payslips, voyage agendas, allotments), including offline access to downloaded documents and allotment requests held on the device until the app reopens online",
       "Proposed a middleware API, built and adopted by the team, giving the app one consistent entry point to Marlow's many services",
     ],
     caseStudy: "marlow-offline-first-app",
@@ -38,18 +38,18 @@ export const experience: Role[] = [
     period: "2021 – 2022",
     location: "Hong Kong · Remote",
     highlights: [
-      "Helped build a hybrid-work scheduler (React Native app, React configuration dashboard, NestJS API) where each company sets its own location and time-slot rules",
+      "Contributed to a hybrid-work scheduler (React Native app, React configuration dashboard, NestJS API) where each company sets its own scheduling policies",
       "Helped set up queued bulk imports through Kafka and a Neo4j graph representation, synchronized from PostgreSQL, for per-user relationship reads",
     ],
     caseStudy: "flydesk-hybrid-work-scheduler",
   },
   {
     company: "Opcadia",
-    title: "Frontend Engineer (Contract)",
+    title: "Frontend Engineer (contract)",
     period: "2020 – 2021",
     location: "France · Remote",
     highlights: [
-      "Led the rebuild of a legacy PHP store as a self-service Next.js e-commerce platform, delivered within 6 months",
+      "Led the rebuild of a legacy PHP study-plan store as a self-service Next.js platform with instant course previews and live enrolment status, delivered within 6 months",
     ],
     caseStudy: "opcadia-php-to-nextjs",
   },

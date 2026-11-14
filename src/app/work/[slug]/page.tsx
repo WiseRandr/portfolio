@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ContactCTA } from "@/components/ContactCTA";
 import { Container } from "@/components/Container";
 import { caseStudies, getCaseStudy } from "@/data/case-studies";
+import { profile } from "@/data/profile";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -22,7 +23,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: study.summary,
     // Drafts are reachable for review but kept out of search results.
     robots: study.status === "draft" ? { index: false, follow: true } : undefined,
-    openGraph: { title: study.title, description: study.summary },
+    alternates: { canonical: `work/${study.slug}/` },
+    // Page-level openGraph replaces the layout's, so repeat the shared fields.
+    openGraph: {
+      type: "article",
+      siteName: profile.name,
+      title: study.title,
+      description: study.summary,
+      url: `work/${study.slug}/`,
+      images: [{ url: "og-image.jpg", alt: `Portrait of ${profile.name}` }],
+    },
   };
 }
 

@@ -57,7 +57,7 @@ export function PasscodeFlowDiagram() {
           <Branch
             label="If online"
             tone="online"
-            items={["Fetch current information", "Submit pending actions, then clear them from the device"]}
+            items={["Fetch current information", "Submit pending actions; clear each once the service confirms it"]}
             note="Fetching and submitting both start once the app is online; no fixed order between them is implied."
           />
           <Branch

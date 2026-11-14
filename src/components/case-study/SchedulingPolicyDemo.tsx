@@ -3,9 +3,11 @@
 import { useId, useState } from "react";
 
 // An original, schematic scheduling screen with fictional companies, people and
-// policies. One schedule is checked against the selected company's policy; the
-// schedule itself is kept when the company changes, so a conflict is always
-// explained rather than silently cleared. Nothing is sent anywhere.
+// policies. An unsaved draft is checked against the selected company's policy;
+// the draft is kept when the company changes, so a conflict is always explained
+// rather than silently cleared. Nothing is saved or sent anywhere. The
+// permissions example shows a separate, fixed saved schedule, so draft edits
+// never appear to other viewers.
 
 type Location = "Remote" | "Office" | "Coworking";
 type CompanyId = "lumen" | "cedar";
@@ -29,6 +31,13 @@ const COMPANIES: Record<CompanyId, { name: string; policy: string; splitDays: bo
 const INITIAL: Day[] = [
   { day: "Monday", morning: "Office", afternoon: "Office" },
   { day: "Tuesday", morning: "Remote", afternoon: "Office" },
+  { day: "Wednesday", morning: "Coworking", afternoon: "Coworking" },
+];
+
+// What other viewers see: the last saved schedule, not the draft being edited.
+const SAVED: Day[] = [
+  { day: "Monday", morning: "Office", afternoon: "Office" },
+  { day: "Tuesday", morning: "Remote", afternoon: "Remote" },
   { day: "Wednesday", morning: "Coworking", afternoon: "Coworking" },
 ];
 
@@ -104,7 +113,10 @@ export function SchedulingPolicyDemo() {
             <span className="text-ink-muted">{company.policy}</span>
           </div>
 
-          <div className="mt-4 text-xs font-medium text-ink">Sam Ortega · this week (fictional)</div>
+          <div className="mt-4 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+            <div className="text-xs font-medium text-ink">Sam Ortega · this week (fictional)</div>
+            <div className="text-xs text-ink-muted">Draft · not saved</div>
+          </div>
           <div role="list" className="mt-2 space-y-2">
             {days.map((d, i) => {
               const split = d.morning !== d.afternoon;
@@ -172,10 +184,10 @@ export function SchedulingPolicyDemo() {
 
           <div role="status" aria-live="polite" className="mt-3 text-sm text-ink">
             {conflicts.length === 0
-              ? `This schedule fits the ${company.name} policy.`
+              ? `This draft fits the ${company.name} policy.`
               : `${conflicts.length} day${conflicts.length > 1 ? "s" : ""} conflict${
                   conflicts.length > 1 ? "" : "s"
-                } with the ${company.name} policy. The schedule is kept, so you can choose an allowed option.`}
+                } with the ${company.name} policy. The draft is kept, so you can choose an allowed option.`}
           </div>
           <div className="mt-1 text-xs leading-relaxed text-ink-faint">
             This check gives feedback in the interface; a real product must also enforce the policy in the API.
@@ -185,13 +197,16 @@ export function SchedulingPolicyDemo() {
         {/* Subordinate, static example: who can see a shared schedule. */}
         <div className="mt-5 border-t border-line pt-4">
           <div className="text-sm font-medium text-ink">Conceptual permissions example</div>
-          <div className="mt-1 text-sm text-ink-muted">Sam&apos;s schedule is shared with the Design group.</div>
+          <div className="mt-1 text-sm text-ink-muted">
+            Sam&apos;s last saved schedule is shared with the Design group. Unsaved draft changes aren&apos;t visible to
+            anyone else.
+          </div>
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
             <div className="rounded-lg border border-line bg-bg px-3 py-2.5 text-sm">
               <div className="font-medium text-ink">Priya · Design group</div>
-              <div className="mt-0.5 text-xs text-ink-muted">In the group, so Sam&apos;s schedule is visible:</div>
+              <div className="mt-0.5 text-xs text-ink-muted">In the group, so Sam&apos;s saved schedule is visible:</div>
               <div role="list" className="mt-1.5 space-y-0.5 text-xs text-ink">
-                {days.map((d) => (
+                {SAVED.map((d) => (
                   <div key={d.day} role="listitem">
                     {d.day}: {describe(d)}
                   </div>

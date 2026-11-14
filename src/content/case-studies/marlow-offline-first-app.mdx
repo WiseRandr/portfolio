@@ -49,7 +49,7 @@ Offline, the app shows "Offline · Showing saved information", because the list 
 
 ### Block what needs a connection, keep the screen usable
 
-Downloading and sharing need a connection, even for a document that's already downloaded. Offline, they show a notification instead of failing, and the rest of the screen stays usable. Removing a download works offline, since it only touches the device.
+Downloading a document needs a connection. Sharing does too, even for a document that's already downloaded. Offline, both show a notification instead of failing, and the rest of the screen stays usable. Opening a downloaded document and removing a download both work offline, since they only touch the device.
 
 ## Allotment requests that wait for the next online start
 
@@ -57,7 +57,7 @@ A crew member picks a beneficiary from their existing list and enters an amount.
 
 <AllotmentRequestDemo />
 
-In this app, pending submissions were triggered when the user reopened the app online, rather than immediately on reconnection or through an operating-system background task. After the passcode is verified, an app event triggers the Redux-Saga actions that submit the pending requests, and the app then clears the submitted requests from the device. A submitted request has reached Marlow's service for processing; it is not a completed bank transfer.
+In this app, pending submissions were triggered when the user reopened the app online, rather than immediately on reconnection or through an operating-system background task. After the passcode is verified, an app event triggers the Redux-Saga actions that submit the pending requests. Once Marlow's service confirms it received a request, the app clears that request from the device. A submitted request has reached Marlow's service for processing; it is not a completed bank transfer.
 
 ## One API in front of many services
 

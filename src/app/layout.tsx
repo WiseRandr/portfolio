@@ -14,13 +14,15 @@ export const metadata: Metadata = {
     default: `${profile.name} | ${profile.title}`,
     template: `%s | ${profile.name}`,
   },
-  description: profile.summary,
+  description: `${profile.summary} ${profile.availability}`,
+  alternates: { canonical: "./" },
   authors: [{ name: profile.name }],
   openGraph: {
     type: "website",
     siteName: profile.name,
     title: `${profile.name} | ${profile.title}`,
-    description: profile.summary,
+    description: `${profile.summary} ${profile.availability}`,
+    url: "./",
     images: [{ url: "og-image.jpg", alt: `Portrait of ${profile.name}` }],
   },
   twitter: { card: "summary" },
@@ -32,11 +34,11 @@ const personJsonLd = {
   "@type": "Person",
   name: profile.name,
   jobTitle: profile.title,
-  description: profile.summary,
+  description: `${profile.summary} ${profile.availability}`,
   url: `${profile.siteUrl}/`,
   email: `mailto:${profile.email}`,
   sameAs: [profile.links.github, profile.links.linkedin],
-  knowsAbout: ["React", "Next.js", "TypeScript", "React Native", "Frontend architecture", "Web performance"],
+  knowsAbout: ["React", "Next.js", "TypeScript", "React Native", "NestJS", "Offline support in mobile apps"],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

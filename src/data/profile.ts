@@ -4,9 +4,11 @@ export const profile = {
   name: "Wise Randriamialison",
   shortName: "Wise R.",
   title: "Senior Frontend Engineer",
-  headline: "I build frontends that hold up at scale.",
+  headline: "I build reliable web and mobile products with React and TypeScript.",
   summary:
-    "Senior frontend engineer with 8+ years shipping web and mobile products with React, Next.js, and TypeScript. Experienced working remotely with teams across North America and Europe.",
+    "Senior Frontend Engineer with 8+ years building web and mobile products with React, Next.js, React Native and TypeScript, and hands-on full-stack work with NestJS, Redis and job queues.",
+  // Future openness, not a statement about residence, work authorization or working hours.
+  availability: "Open to fully remote, full-time or contract roles with teams in Europe and elsewhere.",
   openTo: "Open to senior frontend and full-stack roles",
   yearsOfExperience: "8+",
   email: "randriamialisonwise@gmail.com",
@@ -20,34 +22,35 @@ export const profile = {
   resumeFile: "/WiseRandriamialisonResume.pdf",
 } as const;
 
+// Verified contributions first; account counts are operating context, not a highlight.
 export const proofPoints = [
-  { value: "~2,000", label: "rider and driver accounts on a platform I helped lead" },
-  { value: "5", label: "engineers led" },
-  { value: "8+ yrs", label: "building production software" },
-  { value: "PHP → Next.js", label: "platform migration led" },
+  { value: "8+ yrs", label: "building web and mobile products" },
+  { value: "5", label: "engineers led on a ride-hailing platform" },
+  { value: "6 months", label: "to deliver a PHP → Next.js rebuild I led" },
+  { value: "Offline", label: "voyage documents and requests for crews at sea" },
 ] as const;
 
-// Confirmed with Wise 2026-10-22. Each principle is backed by a case study.
+// Each principle is a concrete example from a case study (revised 2026-11-14).
 export const principles = [
   {
-    title: "Own the whole problem",
-    body: "I learn the system end to end, from the apps to the API, and stay with a problem until it's solved, so my decisions hold up across the stack.",
+    title: "Work across the stack",
+    body: "At COMIN I worked on both mobile apps, the NestJS API, Stripe payments and the ops dashboard, and took the product live with the owner.",
   },
   {
     title: "Fix the cause, not the symptom",
-    body: "When apps freeze or data lags, I look at the architecture behind it, not just the screen. That's how live driver locations ended up in Redis.",
+    body: "When apps froze and driver positions jumped, I looked at where live locations were stored, not just at the map. They moved to Redis.",
   },
   {
-    title: "Readable over clever",
-    body: "Code is read far more often than it's written. I choose the clear solution over the complex one, so the whole team can work on it.",
+    title: "Control how work is processed",
+    body: "Ride requests and payments arrived in bursts, so I moved them onto job queues and serialized driver acceptance instead of handling everything at once.",
   },
   {
-    title: "Integrity and security before speed",
-    body: "Correct data and a safe system come before shipping fast, like putting payments through a queue instead of handling each one the moment it arrives.",
+    title: "Code the whole team can work in",
+    body: "A shared module for both COMIN apps and one Redux pattern meant anyone on the team could work in any part of the code.",
   },
   {
     title: "Write it down",
-    body: "Across teams, chat and calls stop being enough. Documentation becomes the source of truth, so I make it part of the work.",
+    body: "On Marlow, as work spread across teams, I made documentation a team practice: API expectations, decisions and owners.",
   },
 ] as const;
 
@@ -63,6 +66,7 @@ export const skills = {
     "Docker",
     "AWS",
     "Redux",
+    "Redux-Saga",
     "Expo",
     "Google Maps Navigation SDK",
   ],

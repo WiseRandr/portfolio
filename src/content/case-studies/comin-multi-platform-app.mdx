@@ -50,7 +50,7 @@ Ride requests and payments arrive in bursts, and handling each one the moment it
 
 ### Google Maps Navigation SDK in the driver app
 
-A teammate embedded the Google Maps Navigation SDK in the driver app, and I helped with the integration later. Drivers get turn-by-turn guidance without switching to a separate navigation app mid-ride, and the SDK draws the route and recalculates it when a driver misses a turn or traffic changes, which took route rendering and rerouting out of our own code. COMIN's agreement with Google billed navigation per completed ride, so rerouting during a ride added no cost; that was specific to COMIN's contract, as [Google's standard pricing](https://developers.google.com/maps/documentation/navigation/android-sdk/usage-and-billing) bills per requested destination. The cost is a dependency on a native SDK, with its own pricing terms and upgrade cycle.
+A teammate embedded the Google Maps Navigation SDK in the driver app, and I helped with the integration later. Drivers get turn-by-turn guidance without switching to a separate navigation app mid-ride, and the SDK draws the route and recalculates it when a driver misses a turn or traffic changes, which took route rendering and rerouting out of our own code. COMIN's agreement with Google billed navigation per completed ride. That was specific to COMIN's contract: [Google's standard pricing](https://developers.google.com/maps/documentation/navigation/android-sdk/pricing) bills per requested destination, with no extra charge for route changes after a destination is fetched. The cost is a dependency on a native SDK, with its own pricing terms and upgrade cycle.
 
 ### NestJS modules for the API
 

@@ -34,7 +34,7 @@ export const experience: Role[] = [
   },
   {
     company: "FLYDESK",
-    title: "Frontend Engineer",
+    title: "Frontend Engineer (full-time)",
     period: "2021 – 2022",
     location: "Hong Kong · Remote",
     highlights: [

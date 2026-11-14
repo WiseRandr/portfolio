@@ -43,7 +43,7 @@ export const caseStudies: CaseStudy[] = [
     title: "Company-specific scheduling policies for hybrid teams",
     company: "FLYDESK",
     period: "2021 – 2022",
-    role: "Frontend Engineer",
+    role: "Frontend Engineer (full-time)",
     summary:
       "Contributed to a hybrid-work scheduler (React Native app, React dashboard, NestJS API) where schedules follow each company's policies and group visibility. Helped set up Kafka-queued imports and a Neo4j read model.",
     stack: ["React Native", "React", "NestJS", "PostgreSQL", "Neo4j", "Kafka"],

@@ -1,8 +1,12 @@
 import type { ReactNode } from "react";
 import type { MDXComponents } from "mdx/types";
+import { AllotmentRequestDemo } from "@/components/case-study/AllotmentRequestDemo";
 import { ArchitectureComparison } from "@/components/case-study/ArchitectureComparison";
+import { DeliveryCoordinationDiagram } from "@/components/case-study/DeliveryCoordinationDiagram";
+import { DocumentAccessDemo } from "@/components/case-study/DocumentAccessDemo";
 import { LiveTrackingDemo } from "@/components/case-study/LiveTrackingDemo";
 import { LocationFlowDiagram } from "@/components/case-study/LocationFlowDiagram";
+import { PasscodeFlowDiagram } from "@/components/case-study/PasscodeFlowDiagram";
 
 // Marks text Wise still has to write. Rendered visibly so a draft can never
 // be mistaken for finished content.
@@ -16,5 +20,5 @@ function Placeholder({ children }: { children: ReactNode }) {
 }
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
-  return { Placeholder, LiveTrackingDemo, LocationFlowDiagram, ArchitectureComparison, ...components };
+  return { Placeholder, LiveTrackingDemo, LocationFlowDiagram, ArchitectureComparison, DocumentAccessDemo, AllotmentRequestDemo, PasscodeFlowDiagram, DeliveryCoordinationDiagram, ...components };
 }

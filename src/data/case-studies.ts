@@ -33,9 +33,9 @@ export const caseStudies: CaseStudy[] = [
     period: "2022 – 2026",
     role: "Frontend Engineer (contract)",
     summary:
-      "Built features for Marlow's mobile app for seafarers and captains: sailing documents, payslips, voyage agendas and allotments, plus a crew-admin workspace, all usable offline.",
-    stack: ["React Native", "TypeScript", "Offline caching"],
-    outcome: "Works offline at sea",
+      "Built features for Marlow's mobile app for seafarers and captains, including offline access to downloaded voyage documents and allotment requests held until the app is reopened online. Proposed the middleware API the team adopted.",
+    stack: ["React Native", "TypeScript", "Redux-Saga", "React Native Keychain"],
+    outcome: "Downloaded documents open offline",
     status: "published",
   },
   {

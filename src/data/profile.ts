@@ -43,7 +43,7 @@ export const principles = [
   },
   {
     title: "Integrity and security before speed",
-    body: "Correct data and a safe system come before shipping fast: one secure API in front of many services, and payments that go through a queue.",
+    body: "Correct data and a safe system come before shipping fast, like putting payments through a queue instead of handling each one the moment it arrives.",
   },
   {
     title: "Write it down",

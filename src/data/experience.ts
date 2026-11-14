@@ -39,7 +39,7 @@ export const experience: Role[] = [
     location: "Hong Kong · Remote",
     highlights: [
       "Helped build a hybrid-work scheduler (React Native app, React configuration dashboard, NestJS API) where each company sets its own location and time-slot rules",
-      "Helped set up queued bulk imports through Kafka and a Neo4j replica of PostgreSQL that sped up per-user queries",
+      "Helped set up queued bulk imports through Kafka and a Neo4j graph representation, synchronized from PostgreSQL, for per-user relationship reads",
     ],
     caseStudy: "flydesk-hybrid-work-scheduler",
   },

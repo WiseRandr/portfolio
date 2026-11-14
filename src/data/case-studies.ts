@@ -45,9 +45,9 @@ export const caseStudies: CaseStudy[] = [
     period: "2021 – 2022",
     role: "Frontend Engineer",
     summary:
-      "Helped build a hybrid-work scheduler: a React Native app, a React configuration dashboard and a NestJS API, with queued bulk imports and a Neo4j replica for faster per-user queries.",
+      "Helped build a hybrid-work scheduler (React Native app, React dashboard, NestJS API) with company-specific scheduling policies and group-based visibility, plus queued bulk imports and a Neo4j graph representation for per-user reads.",
     stack: ["React Native", "React", "NestJS", "PostgreSQL", "Neo4j", "Kafka"],
-    outcome: "Rules per company",
+    outcome: "Company-specific scheduling policies",
     status: "published",
   },
   {

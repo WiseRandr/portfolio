@@ -1,6 +1,6 @@
 ## Overview
 
-COMIN is a ride-hailing platform: riders book a trip, and drivers pick them up and take them where they need to go. It is made of four parts that work together in real time: a rider app, a driver app, an API, and a dashboard for the operations team.
+COMIN is a ride-hailing platform: riders book a trip, and drivers pick them up and take them where they need to go. It is made of four parts that work together in real time: a rider app, a driver app, an API, and a web dashboard for the operations team.
 
 I joined as Lead Frontend Engineer (part-time) and led a team of five engineers across all four parts. Frontend is my specialism; on this project I also designed and built the live-location and queueing changes described below. I was responsible for engineering delivery and reliability as the operational load changed; I didn't own rider or driver acquisition, or marketing.
 
@@ -31,7 +31,7 @@ How current the location data is and how the app draws movement between updates 
 - **Built myself:** the Redis live-location store and driver-position flow, and the job queues for ride requests, driver acceptance and payments.
 - **Mobile apps:** maintained the rider and driver apps, created the shared module they both use, and reworked the start-up flow. I also helped with the Navigation SDK integration a teammate built.
 - **API and payments:** maintained the NestJS API and worked on the Stripe payment system.
-- **Operations dashboard:** built and maintained the dashboard the operations team used to run the service day to day.
+- **Operations dashboard:** built and maintained the web dashboard the operations team used to run the service day to day, with Tailwind CSS, shadcn/ui components and CSS animations. (The mobile apps are React Native and use none of these.)
 - **Launch:** took the product live with the owner.
 
 ## Key decisions and trade-offs

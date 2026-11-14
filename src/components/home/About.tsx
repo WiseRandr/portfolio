@@ -29,6 +29,10 @@ export function About() {
               <h3 className="text-sm uppercase tracking-[0.14em] text-ink-faint">Also work with</h3>
               <p className="mt-2 text-ink-muted">{skills.alsoWith.join(" · ")}</p>
             </div>
+            <div>
+              <h3 className="text-sm uppercase tracking-[0.14em] text-ink-faint">Debugging and audits</h3>
+              <p className="mt-2 text-ink-muted">{skills.tools.join(" · ")}</p>
+            </div>
           </div>
         </div>
         <div>

@@ -38,7 +38,7 @@ export const principles = [
   },
   {
     title: "Fix the cause, not the symptom",
-    body: "When apps froze and driver positions jumped, I looked at where live locations were stored, not just at the map. They moved to Redis.",
+    body: "When apps froze and driver positions jumped, I looked at where live locations were stored, not just at the map. They moved to Redis. Day to day, I inspect components and UI behavior with React Developer Tools and Chrome DevTools before changing code.",
   },
   {
     title: "Control how work is processed",
@@ -55,7 +55,7 @@ export const principles = [
 ] as const;
 
 export const skills = {
-  core: ["React", "Next.js", "TypeScript", "React Native", "JavaScript", "UI performance", "Responsive design"],
+  core: ["React", "Next.js", "TypeScript", "React Native", "JavaScript", "HTML", "CSS", "Tailwind CSS", "UI performance", "Responsive design"],
   alsoWith: [
     "Node.js",
     "NestJS",
@@ -69,5 +69,9 @@ export const skills = {
     "Redux-Saga",
     "Expo",
     "Google Maps Navigation SDK",
+    "shadcn/ui",
+    "CSS animation",
   ],
+  // Tool use only (confirmed 2026-11-14): no scores or measured improvements are claimed.
+  tools: ["React Developer Tools", "Chrome DevTools", "Lighthouse", "PageSpeed Insights"],
 } as const;

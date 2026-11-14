@@ -17,6 +17,7 @@ export const experience: Role[] = [
     highlights: [
       "Led a team of 5 engineers building a ride-hailing platform (rider and driver apps, NestJS API, ops dashboard) with ~2,000 rider and driver accounts",
       "Reworked live-ride handling with Redis for driver locations and job queues for ride requests, driver acceptance and payments; within two months, alongside marketing outreach, completed rides rose from 4–5 to 20–30 a day",
+      "Built and maintained the web operations dashboard with Tailwind CSS, shadcn/ui components and CSS animations",
       "Helped integrate the Google Maps Navigation SDK so drivers navigate in-app, with route drawing and rerouting handled by the SDK",
     ],
     caseStudy: "comin-multi-platform-app",
@@ -38,7 +39,7 @@ export const experience: Role[] = [
     period: "2021 – 2022",
     location: "Hong Kong · Remote",
     highlights: [
-      "Contributed to a hybrid-work scheduler (React Native app, React configuration dashboard, NestJS API) where each company sets its own scheduling policies",
+      "Contributed to a hybrid-work scheduler (React Native app, React configuration dashboard, NestJS API) where each company sets its own scheduling policies; worked on the dashboard's CSS and Tailwind CSS interface with the UI/UX team",
       "Helped set up queued bulk imports through Kafka and a Neo4j graph representation, synchronized from PostgreSQL, for per-user relationship reads",
     ],
     caseStudy: "flydesk-hybrid-work-scheduler",
@@ -50,6 +51,7 @@ export const experience: Role[] = [
     location: "France · Remote",
     highlights: [
       "Led the rebuild of a legacy PHP study-plan store as a self-service Next.js platform with instant course previews and live enrolment status, delivered within 6 months",
+      "Used Lighthouse and PageSpeed Insights to review page performance and automated SEO checks",
     ],
     caseStudy: "opcadia-php-to-nextjs",
   },
